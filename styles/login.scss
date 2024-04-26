@@ -1,0 +1,109 @@
+:root{
+  --background: #eabc86;
+  --nav-color: #193b9b;
+  --font-color: #193b9b;
+  --border-color: #193b9b;
+  --button-color: #193b9b;
+  --navlink-color: #ffffff;
+}
+
+body,html{
+  background-color: var(--background);
+  background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+  height: 100vh;
+  width: 100%;
+  overflow-y: auto;
+  font-family: "Monserrat", sans-serif;
+}
+
+nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  background-color: var(--nav-color);
+  color: #ffffff;
+  align-self: flex-start;
+
+  h1{
+    font-size: 2rem;
+    margin: 0 2%;
+  }
+
+  .nav-links{
+    margin: 0 2%;
+  }
+
+ a{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight:500;
+    transition: 0.2s ease;
+  }
+}
+
+nav a:hover{
+  color: #c5c5c5;
+}
+
+form{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(-5px 5px 1rem #000000ca);
+}
+
+form div{
+  padding: 3%;
+  width: 40%;
+  background-color: #ffffff;
+  color: var(--font-color);
+  border-radius: 20px;
+
+  h3 {
+    margin-left: 10px;
+  }
+
+  input{
+    width: 100%;
+    height: 40px;
+    border: solid 3px var(--border-color);
+    border-radius: 20px;
+    padding: 0 20px;
+  }
+}
+
+.login-signup{
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+
+
+  .login-btn{
+    background-color: var(--button-color);
+    color: #ffffff;
+    font-weight: 600;
+    border: solid 3px var(--border-color);
+    border-radius: 20px;
+    padding: 2.5%;
+    transition: 0.5s ease;
+  }
+
+  a{
+    color: var(--font-color);
+    font-weight: 600;
+    padding-left: 5px;
+  }
+}
+
+.login-btn:hover{
+  background-color: #ffffff;
+  color: var(--font-color);
+  cursor: pointer;
+}

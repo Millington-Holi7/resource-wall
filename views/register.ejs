@@ -26,10 +26,10 @@
     <nav>
       <h1>Resource ✹ Wall</h1>
       <div class="nav-links">
-        <a class="nav-items" href="/users">Log in</a>
+        <a class="nav-items" href="/users/login">Log in</a>
       </div>
     </nav>
-    <form action="/register" method="POST">
+    <form action="/api/users" method="POST">
       <div>
         <h1>Sign Up</h1>
         <h3>Email address</h3>
@@ -51,12 +51,12 @@
         <input
         class="ml-auto"
         type="password"
-        name="password"
+        name="confirmPassword"
         placeholder="Confirm Password"
         />
         <div class="register">
           <button class="signup-btn" type="submit">Register</button>
-          <a href="/users">Cancel</a>
+          <a href="/users/login">Cancel</a>
         </div>
       </div>
     </form>
