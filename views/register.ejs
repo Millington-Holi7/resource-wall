@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/vendor/border-box.css" />
     <link rel="stylesheet" href="/styles/main.css" />
     <link rel="stylesheet" href="/styles/layout.css" />
-    <link rel="stylesheet" href="/styles/login.css" />
+    <link rel="stylesheet" href="/styles/register.css" />
 
     <!-- EXTERNAL JAVASCRIPT -->
 
@@ -26,12 +26,12 @@
     <nav>
       <h1>Resource ✹ Wall</h1>
       <div class="nav-links">
-        <a class="nav-items" href="/users/register">Sign Up</a>
+        <a class="nav-items" href="/users">Log in</a>
       </div>
     </nav>
-    <form action="/login" method="POST">
+    <form action="/register" method="POST">
       <div>
-        <h1>Login</h1>
+        <h1>Sign Up</h1>
         <h3>Email address</h3>
         <input
         class="ml-auto"
@@ -46,9 +46,17 @@
         name="password"
         placeholder="Enter Password"
         />
-        <div class="login-signup">
-          <button class="login-btn" type="submit">Log in</button>
-          <p>Don't have an account?<a href="/users/register" class="signin-btn">Sign up</a></p>
+
+        <h3>Confirm Password</h3>
+        <input
+        class="ml-auto"
+        type="password"
+        name="password"
+        placeholder="Confirm Password"
+        />
+        <div class="register">
+          <button class="signup-btn" type="submit">Register</button>
+          <a href="/users">Cancel</a>
         </div>
       </div>
     </form>
