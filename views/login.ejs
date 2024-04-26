@@ -24,7 +24,10 @@
   </head>
   <body>
     <nav>
-
+      <h1>Resource ✹ Wall</h1>
+      <div class="nav-links">
+        <a class="nav-items" href="">Sign Up</a>
+      </div>
     </nav>
     <form action="/login" method="POST">
       <div>
@@ -43,6 +46,10 @@
         name="password"
         placeholder="Enter Password"
         />
+        <div class="login-signup">
+          <button class="login-btn" type="submit">Log in</button>
+          <p>Don't have an account?<a href="/views/register.ejs" class="signin-btn">Sign up</a></p>
+        </div>
       </div>
     </form>
   </body>
