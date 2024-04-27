@@ -1,0 +1,158 @@
+body{
+  background-image:url(https://www.transparenttextures.com/patterns/asfalt-dark.png);
+  // background-color: #eabc86;
+  margin: 20px auto;
+  font-family: 'Lato';
+  display: flex;
+  flex-direction: column;
+  gap: -20em;
+  background-color:rgba(59, 88, 161, 0.9);
+}
+*{
+  margin:0;
+  padding:0;
+}
+
+.main-title{
+  padding: 1em;
+  font-size: 10em;
+  margin-bottom: 0.2em;
+  
+}
+
+
+ul,li{
+  list-style:none;
+  background-color: #eabc86;
+  background-image:url(https://www.transparenttextures.com/patterns/asfalt-dark.png);
+}
+ul{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 1.5em solid rgb(172, 111, 20);
+  border-style: ridge;
+  
+}
+ul li a{
+  text-decoration:none;
+  color:#000;
+  background:#ffc;
+  display:block;
+  height:22em;
+  width:22em;
+  padding:1em;
+  box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+	transform: rotate(-6deg);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	padding: 1.5em;
+	// margin-top: 2em;
+  margin-bottom: 3em;
+}
+ul li{
+  margin:1em;
+}
+
+p {
+  font-family: 'Reenie Beanie';
+  font-size: 2rem;
+	font-weight: normal;
+	margin-bottom: 2em;
+}
+
+ul li:nth-child(even) a{
+  transform:rotate(4deg);
+  position:relative;
+  top:5px;
+	position:relative;
+  top:5px;
+  background:#cfc;
+}
+ul li:nth-child(3n) a{
+  transform:rotate(-3deg);
+  position:relative;
+  top:-5px;
+	position:relative;
+  top:-5px;
+  background:#ccf;
+}
+ul li:nth-child(5n) a{
+  transform:rotate(5deg);
+  position:relative;
+  top:-10px;
+}
+
+ul li a:hover,ul li a:focus{
+  box-shadow:10px 10px 7px rgba(0,0,0,.7);
+  transform: scale(1.15);
+  position:relative;
+  z-index:5;
+}
+
+
+.pin {
+  background-color: #aaa;
+  display: block;
+  height: 32px;
+  width: 2px;
+  position: absolute;
+  left: 50%;
+  top: -16px;
+  z-index: 1;
+}
+
+.pin:after {
+  background-color: #A31;
+  background-image: radial-gradient(25% 25%, circle, hsla(0,0%,100%,.3), hsla(0,0%,0%,.3));
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.1), inset 3px 3px 3px hsla(0,0%,100%,.2), inset -3px -3px 3px hsla(0,0%,0%,.2), 23px 20px 3px hsla(0,0%,0%,.15);
+  content: '';
+  height: 12px;
+  left: -5px;
+  position: absolute;
+  top: -10px;
+  width: 12px;
+}
+
+.pin:before {
+  background-color: hsla(0,0%,0%,0.1);
+  box-shadow: 0 0 .25em hsla(0,0%,0%,.1);
+  content: ''; 
+
+  height: 24px;
+  width: 2px;
+  left: 0;
+  position: absolute;
+  top: 8px;
+ 
+  transform: rotate(57.5deg);
+  -moz-transform: rotate(57.5deg);
+  -webkit-transform: rotate(57.5deg);
+  -o-transform: rotate(57.5deg);
+  -ms-transform: rotate(57.5deg);
+ 
+  transform-origin: 50% 100%;
+  -moz-transform-origin: 50% 100%;
+  -webkit-transform-origin: 50% 100%;
+  -ms-transform-origin: 50% 100%;
+  -o-transform-origin: 50% 100%;
+}
+
+
+.icon{
+	display: flex;
+	justify-content: flex-end;
+	color: rgb(199, 9, 9);
+	// margin: 5px;
+}
+
+.fa-solid {
+	margin: 5px;
+	font-size: larger;
+}
+
+.fa-solid:hover {
+  color: rgb(59, 88, 161, 0.9);
+}
