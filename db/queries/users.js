@@ -61,7 +61,7 @@ const getUserWithId = function (id) {
     })
 };
 
-///Add a new user to the database.
+///Add a new user to the database. REgister page
 const addUser = function (user) {
   const { name, email, password, profile_pic_url } = user;
   return pool.query(
@@ -87,7 +87,7 @@ const getAllPosts = function () {
   return pool.query(
     `SELECT title, content_link_url, description, date_posted, comments, likes
   FROM posts
-  JOIN
+  JOIN post_comments ON
   ORDER BY date_posted;`,
     []
   )
@@ -104,7 +104,7 @@ const getAllPosts = function () {
 /**
  *post_likes table get all liked posts
  all the post info that match the post_id in post_likes
- * @returns
+ *
  */
 const getAllLikePosts = function () {
   return pool.query(
@@ -115,4 +115,20 @@ const getAllLikePosts = function () {
   )
 }
 
-module.exports = { getUsers };
+// get all posts that have the same topic
+
+
+// Update user info based on input into the profile page
+
+const updateUser = function(options){
+
+}
+
+module.exports = {
+  getUsers,
+  addUser,
+  getUserWithEmail,
+  getUserWithId,
+  getAllLikePosts,
+  getAllPosts
+ };
