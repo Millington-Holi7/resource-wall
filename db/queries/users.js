@@ -3,12 +3,27 @@ const db = require('../connection');
 //USERS CRUD QUERIES
 
 //CREATE
-const createUser = (body) => {
-  const {email, password} = body;
-  return db.query('INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *;', [email, password])
-    .then(data => {
-      return data.rows[0];
-    });
+///Add a new user to the database.
+const addUser = function (user) {
+  const { name, email, password, profile_pic_url } = user;
+  return pool.query(
+    `INSERT INTO users (name, email, password, profile_pic_url)
+   VALUES ($1, $2, $3, $4)
+   RETURNING *;`,
+    [name, email, password, profile_pic_url]
+  )
+    .then((result) => {
+      return result.rows;
+    })
+
+    .catch((error) => {
+      console.error(error)
+    })
+};
+
+
+const addRaiting = function() {
+
 };
 
 //READ ALL
@@ -19,10 +34,28 @@ const getUsers = () => {
     });
 };
 
+///Posts
+// Get all posts for the main page
+const getAllPosts = function () {
+  return pool.query(
+    `SELECT title, content_link_url, description, date_posted, comments, likes
+  FROM posts
+  JOIN
+  ORDER BY date_posted;`,
+    []
+  )
+    .then((result) => {
+      return result.rows;
+    })
 
+    .catch((error) => {
+      console.error(error)
+    })
+}
+
+//READ ONE
 /// Users
 /// Get a single user from the database given their email.
-
 const getUserWithEmail = function (email) {
 
   return pool.query(
@@ -61,44 +94,6 @@ const getUserWithId = function (id) {
     })
 };
 
-///Add a new user to the database.
-const addUser = function (user) {
-  const { name, email, password, profile_pic_url } = user;
-  return pool.query(
-    `INSERT INTO users (name, email, password, profile_pic_url)
-   VALUES ($1, $2, $3, $4)
-   RETURNING *;`,
-    [name, email, password, profile_pic_url]
-  )
-    .then((result) => {
-      return result.rows;
-    })
-
-    .catch((error) => {
-      console.error(error)
-    })
-
-};
-
-///Posts
-
-// Get all posts for the main page
-const getAllPosts = function () {
-  return pool.query(
-    `SELECT title, content_link_url, description, date_posted, comments, likes
-  FROM posts
-  JOIN
-  ORDER BY date_posted;`,
-    []
-  )
-    .then((result) => {
-      return result.rows;
-    })
-
-    .catch((error) => {
-      console.error(error)
-    })
-}
 
 //Get all liked posts
 /**

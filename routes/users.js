@@ -7,13 +7,19 @@
 
 const express = require('express');
 const router  = express.Router();
+const bcrypt = require("bcryptjs");
 
-router.get('/login', (req, res) => {
+router.get('/login', (req, res) => { ///users/login
     res.render('login');
 });
 
-router.get('/register', (req, res) => {
+
+//REGISTER ROUTES
+
+router.get('/register', (req, res) => { ///users/register
   res.render('register');
 });
+
+
 
 module.exports = router;
