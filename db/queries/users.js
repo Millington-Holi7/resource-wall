@@ -14,7 +14,7 @@ const addUser = function (user) {
       [username, email, password]
     )
     .then((result) => {
-      console.log(result.rows[0])
+      console.log(result.rows[0]);
       return result.rows[0];
     })
 
@@ -95,7 +95,7 @@ const getAllPosts = function () {
 /**
  *post_likes table get all liked posts
  all the post info that match the post_id in post_likes
- * @returns
+ *
  */
 const getAllLikePosts = function () {
   return db.query(
@@ -152,6 +152,21 @@ const getUserWithId = function (id) {
 
 //UPDATE
 
+// get all posts that have the same topic
+
+// Update user info based on input into the profile page
+
+const updateUser = function (options) {};
 //DELETE
 
-module.exports = { addUser, addPost, addLike, addComment, addRaiting, getAllLikePosts, getUserWithEmail, getUserWithId, getUsers };
+module.exports = {
+  addUser,
+  addPost,
+  addLike,
+  addComment,
+  addRaiting,
+  getAllLikePosts,
+  getUserWithEmail,
+  getUserWithId,
+  getUsers,
+};
