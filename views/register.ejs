@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/vendor/border-box.css" />
     <link rel="stylesheet" href="/styles/main.css" />
     <link rel="stylesheet" href="/styles/layout.css" />
-    <link rel="stylesheet" href="/resource-wall/styles/register.scss" />
+    <link rel="stylesheet" href="/styles/register.css" />
 
     <!-- EXTERNAL JAVASCRIPT -->
 
@@ -23,15 +23,17 @@
     <script defer src="/scripts/users.js"></script>
   </head>
   <body>
-    <nav>
-      <h1>Resource ✹ Wall</h1>
-      <div class="nav-links">
-        <a class="nav-items" href="/users/login">Log in</a>
-      </div>
-    </nav>
-    <form action="/api/users" method="POST">
+    <%- include('partials/_header') %>
+    <form method="POST" action="/api/users/register">
       <div>
         <h1>Sign Up</h1>
+        <h3>Username</h3>
+        <input
+        class="ml-auto"
+        type="text"
+        name="username"
+        placeholder="my-username"
+        />
         <h3>Email address</h3>
         <input
         class="ml-auto"

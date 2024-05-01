@@ -5,6 +5,10 @@ require('dotenv').config(); //module that helps manage
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
+const cookieSession = require("cookie-session");
+const router  = express.Router();
+const bcrypt = require("bcryptjs");
+const userQueries = require('./db/queries/users');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -28,16 +32,15 @@ app.use(express.static('public'));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const userApiRoutes = require('./routes/users-api');
-const widgetApiRoutes = require('./routes/widgets-api');
-const usersRoutes = require('./routes/users');
+const postRoutes = require('./routes/postRoutes');
+const userRoutes = require('./routes/userRoutes');
+
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
-app.use('/api/users', userApiRoutes);
-app.use('/api/widgets', widgetApiRoutes);
-app.use('/users', usersRoutes);
+app.use('/api/users', postRoutes);
+app.use('/users', userRoutes); //all routes for users begin with /users
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -45,11 +48,8 @@ app.use('/users', usersRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  res.send("Welcome to my server");
-});
-
-app.get('/dashboard', (req, res) => {
-  res.send("Welcome to the resource wall");
+  const user = {}; //created table and put inside object every route needs this user
+  res.render('index', {user});
 });
 
 app.listen(PORT, () => {
