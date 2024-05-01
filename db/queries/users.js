@@ -4,7 +4,7 @@ const db = require('../connection');
 
 //CREATE
 const createUser = (body) => {
-  const {email, password} = body;
+  const { email, password } = body;
   return db.query('INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *;', [email, password])
     .then(data => {
       return data.rows[0];
@@ -65,10 +65,10 @@ const getUserWithId = function (id) {
 const addUser = function (user) {
   const { name, email, password, profile_pic_url } = user;
   return pool.query(
-    `INSERT INTO users (name, email, password, profile_pic_url)
+    `INSERT INTO users (username, email, password, profile_pic_url)
    VALUES ($1, $2, $3, $4)
    RETURNING *;`,
-    [name, email, password, profile_pic_url]
+    [username, email, password, profile_pic_url]
   )
     .then((result) => {
       return result.rows;
@@ -80,14 +80,21 @@ const addUser = function (user) {
 
 };
 
+// Update user
+const updateUser = function (option){
+  `UPDATE users`
+}
 ///Posts
+//Add post
+const AddNewResource = function ();
 
 // Get all posts for the main page
 const getAllPosts = function () {
   return pool.query(
-    `SELECT title, content_link_url, description, date_posted, comments, likes
+    `SELECT posts.id title, content_link_url, description, date_posted, comments
   FROM posts
-  JOIN post_comments ON
+  RIGHT JOIN post_likes ON posts.id = post_id
+  LEFT JOIN post_comments ON posts.id = post_comments.post_id
   ORDER BY date_posted;`,
     []
   )
@@ -108,19 +115,31 @@ const getAllPosts = function () {
  */
 const getAllLikePosts = function () {
   return pool.query(
-    `SELECT title, content_link_url, description, date_posted, comments, likes
-    FROM posts
-    JOIN post_likes ON post_id = posts.id
-    JOIN post_comments ON  `
+  `SELECT posts.id, title, content_link_url, description, date_posted, comments
+  FROM posts
+  RIGHT JOIN post_likes ON posts.id = post_id
+  LEFT JOIN post_comments ON posts.id = post_comments.post_id
+  ORDER BY date_posted
+;`
+
   )
 }
 
-// get all posts that have the same topic
+// get all posts that have the same topic, search bar
+//they can look for topic or title, url
+const getPosts = function (topic){
+let queryString =
+    `SELECT *
+    FROM POST `
 
+
+
+
+}
 
 // Update user info based on input into the profile page
 
-const updateUser = function(options){
+const updateUser = function (options) {
 
 }
 
@@ -131,4 +150,4 @@ module.exports = {
   getUserWithId,
   getAllLikePosts,
   getAllPosts
- };
+};
