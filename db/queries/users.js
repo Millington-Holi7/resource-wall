@@ -3,9 +3,16 @@ const db = require("../connection");
 //USERS CRUD QUERIES
 
 //CREATE
+const createUser = (body) => {
+  const { email, password } = body;
+  return db.query('INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *;', [email, password])
+    .then(data => {
+      return data.rows[0];
+    });
+};
 ///Add a new user to the database.
 const addUser = function (user) {
-  const { username, email, password } = user;
+  const {  username, email, password  } = user;
   return db
     .query(
       `INSERT INTO users (username, email, password)
@@ -41,15 +48,15 @@ const addPost = function (post) {
     });
 };
 
-const addLike = function (like) {
-  const { user_id, post_id } = like;
-  return db
-    .query(
-      `INSERT INTO post_likes (user_id, post_id)
-  VALUES ($1, $2)
-  RETURNING *;`,
-      [user_id, post_id]
-    )
+///Add a new user to the database. REgister page
+const addUser = function (user) {
+  const { name, email, password, profile_pic_url } = user;
+  return pool.query(
+    `INSERT INTO users (name, email, password, profile_pic_url)
+   VALUES ($1, $2, $3, $4)
+   RETURNING *;`,
+    [name, email, password, profile_pic_url]
+  )
     .then((result) => {
       return result.rows;
     })
@@ -70,15 +77,25 @@ const getUsers = () => {
   });
 };
 
+// Update user
+const updateUser = function (option){
+  `UPDATE users`
+}
 ///Posts
+//Add post
+const AddNewResource = function ();
+
 // Get all posts for the main page
 const getAllPosts = function () {
   return db
     .query(
       `SELECT posts.id title, content_link_url, description, date_posted, comments
+  return pool.query(
+    `SELECT posts.id title, content_link_url, description, date_posted, comments
   FROM posts
   RIGHT JOIN post_likes ON posts.id = post_id
-  LEFT JOIN post_comments ON posts.id = post_comments.post_id
+  LEFT RIGHT JOIN post_likes ON posts.id = post_id
+  LEFT JOIN post_comments ON posts.id = post_comments.post_id posts.id = post_comments.post_id
   ORDER BY date_posted;`,
       []
     )
@@ -154,10 +171,12 @@ const getUserWithId = function (id) {
 
 // get all posts that have the same topic
 
+
 // Update user info based on input into the profile page
 
-const updateUser = function (options) {};
-//DELETE
+const updateUser = function(options){
+
+}
 
 module.exports = {
   addUser,
