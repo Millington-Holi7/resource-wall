@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Resourse Wall | Register</title>
+
+    <!-- META INFORMATION -->
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- EXTERNAL CSS -->
+
+    <link rel="stylesheet" href="vendor/normalize-4.1.1.css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/layout.css" />
+    <link rel="stylesheet" href="/styles/register.css" />
+
+    <!-- EXTERNAL JAVASCRIPT -->
+
+    <script src="/vendor/jquery-3.0.0.js"></script>
+    <script defer src="/scripts/users.js"></script>
+  </head>
+  <body>
+    <%- include('partials/_header') %>
+    <form method="POST" action="/api/users/register">
+      <div>
+        <h1>Sign Up</h1>
+        <h3>Username</h3>
+        <input
+        class="ml-auto"
+        type="text"
+        name="username"
+        placeholder="my-username"
+        />
+        <h3>Email address</h3>
+        <input
+        class="ml-auto"
+        type="email"
+        name="email"
+        placeholder="email@example.com"
+        />
+        <h3>Password</h3>
+        <input
+        class="ml-auto"
+        type="password"
+        name="password"
+        placeholder="Enter Password"
+        />
+
+        <h3>Confirm Password</h3>
+        <input
+        class="ml-auto"
+        type="password"
+        name="confirmPassword"
+        placeholder="Confirm Password"
+        />
+        <div class="register">
+          <button class="signup-btn" type="submit">Register</button>
+          <a href="/users/login">Cancel</a>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>

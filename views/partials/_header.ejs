@@ -1,0 +1,14 @@
+<header>
+  <nav>
+    <h1>Resource ✹ Wall</h1>
+    <div class="nav-links">
+      <% if(!user) { %>
+        <a class="nav-items" href="/users/login">Log in</a>
+      <a class="nav-items" href="/users/register">Sign Up</a>
+      <% } %>
+      <% if (typeof user !== 'undefined' && user) { %>
+        <span><%= user.profile_pic %> <%= user.username %></span>
+        <% } %>
+    </div>
+  </nav>
+</header>

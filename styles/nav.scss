@@ -1,0 +1,41 @@
+:root{
+  --background: #eabc86;
+  --nav-color: #193b9b;
+  --font-color: #193b9b;
+  --border-color: #193b9b;
+  --button-color: #193b9b;
+  --navlink-color: #ffffff;
+  --cancel-color: #cb0000;
+}
+
+nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  background-color: var(--nav-color);
+  color: #ffffff;
+  align-self: flex-start;
+
+  h1{
+    margin: 0 2%;
+    font-size: 2rem;
+  }
+
+  .nav-links{
+    margin: 0 2%;
+  }
+
+ a{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight:500;
+    transition: 0.2s ease;
+  }
+}
+
+nav a:hover{
+  color: #c5c5c5;
+}
