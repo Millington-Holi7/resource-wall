@@ -10,9 +10,10 @@ const createUser = (body) => {
       return data.rows[0];
     });
 };
+
 ///Add a new user to the database.
 const addUser = function (user) {
-  const {  username, email, password  } = user;
+  const { username, email, password } = user;
   return db
     .query(
       `INSERT INTO users (username, email, password)
@@ -48,17 +49,22 @@ const addPost = function (post) {
     });
 };
 
-///Add a new user to the database. REgister page
-const addUser = function (user) {
-  const { name, email, password, profile_pic_url } = user;
-  return pool.query(
-    `INSERT INTO users (name, email, password, profile_pic_url)
-   VALUES ($1, $2, $3, $4)
-   RETURNING *;`,
-    [name, email, password, profile_pic_url]
-  )
-    .then((result) => {
-      return result.rows;
+
+
+const addComment = function (comment) { };
+
+const addRaiting = function (raiting) { };
+
+//READ ALL
+const getUser = (userId) => {
+  return db.query(
+    `SELECT *
+    FROM users
+    WHERE id = $1
+    ;`, [userId])
+
+    .then((data) => {
+      return data.rows[0];
     })
 
     .catch((error) => {
@@ -66,24 +72,27 @@ const addUser = function (user) {
     });
 };
 
-const addComment = function (comment) {};
-
-const addRaiting = function (raiting) {};
-
-//READ ALL
-const getUsers = () => {
-  return db.query(`SELECT * FROM users;`).then((data) => {
-    return data.rows;
-  });
-};
-
 // Update user
-const updateUser = function (option){
-  `UPDATE users`
+const updateUser = function (userId, options) {
+  let promise = Promise.resolve()
+  for (const key in options) {
+    if (options[key]) {
+      promise = promise.then(() => {
+
+        return db.query(
+          `UPDATE users
+    SET ${key} = $1
+    WHERE id = $2;`,
+          [options[key], userId]
+        )
+      })
+    }
+  }
+  return promise;
 }
 ///Posts
 //Add post
-const AddNewResource = function ();
+//const AddNewResource = function ();
 
 // Get all posts for the main page
 const getAllPosts = function () {
@@ -91,7 +100,7 @@ const getAllPosts = function () {
     .query(
       `SELECT posts.id title, content_link_url, description, date_posted, comments
   return pool.query(
-    `SELECT posts.id title, content_link_url, description, date_posted, comments
+    SELECT posts.id title, content_link_url, description, date_posted, comments
   FROM posts
   RIGHT JOIN post_likes ON posts.id = post_id
   LEFT RIGHT JOIN post_likes ON posts.id = post_id
@@ -174,18 +183,17 @@ const getUserWithId = function (id) {
 
 // Update user info based on input into the profile page
 
-const updateUser = function(options){
 
-}
 
 module.exports = {
   addUser,
   addPost,
-  addLike,
+  //addLike,
   addComment,
   addRaiting,
   getAllLikePosts,
   getUserWithEmail,
   getUserWithId,
-  getUsers,
+  getUser,
+  updateUser
 };
