@@ -28,6 +28,15 @@
     <form method="POST" action="/api/users/register">
       <div>
         <h1>Sign Up</h1>
+        <h3>Profile Picture</h3>
+        <div class="profile-pic">
+          <label class="-label" for="file">
+            <span class="glyphicon glyphicon-camera"></span>
+            <span class="change-pic">Change Image</span>
+          </label>
+          <input id="file" type="file" name="profile_pic" onchange="loadFile(event)" />
+          <img src="<%= profile_pic %>" id="output" width="200" />
+        </div>
         <h3>Username</h3>
         <input
         class="ml-auto"
