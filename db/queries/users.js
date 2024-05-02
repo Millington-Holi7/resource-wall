@@ -14,7 +14,7 @@ const addUser = function (user) {
       [username, email, password]
     )
     .then((result) => {
-      console.log(result.rows[0]);
+      // console.log(result.rows[0]);
       return result.rows[0];
     })
 
