@@ -5,7 +5,7 @@ require('dotenv').config(); //module that helps manage
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
-const cookieSession = require("cookie-session");
+// const cookieSession = require("cookie-session");
 const router  = express.Router();
 const bcrypt = require("bcryptjs");
 const userQueries = require('./db/queries/users');
