@@ -77,6 +77,19 @@ router.get('/', (req, res) => {
 //
 // })
 
+// CREATE POST
+router.post('/create-post', (req, res) => {
+  userQueries.addPost(req.body)
+  res.redirect('/resources');
+})
+
+// SEARCH 
+router.post('/search', (req, res) => {
+  console.log(req.body);
+  userQueries.getResource(req.body)
+  res.redirect('/');
+})
+
 
 
 module.exports = router;
