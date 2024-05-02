@@ -25,149 +25,25 @@
     <p class="main-title">My Resources</p>
 
   <ul>
-    <li>
-      <a>
-        <i class="pin"></i>
-        <p>URL:</p>
-        <p>Title:</p>
-        <p>Description:</p>
-        <div class="icon">
-          <i class="fa-solid fa-heart"></i>
-          <i class="fa-solid fa-ranking-star"></i>
-          <i class="fa-solid fa-comment"></i>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a>
-        <i class="pin"></i>
-        <p>URL:</p>
-        <p>Title:</p>
-        <p>Description:</p>
-        <div class="icon">
-          <i class="fa-solid fa-heart"></i>
-          <i class="fa-solid fa-ranking-star"></i>
-          <i class="fa-solid fa-comment"></i>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a>
-        <i class="pin"></i>
-        <p>URL:</p>
-        <p>Title:</p>
-        <p>Description:</p>
-        <div class="icon">
-          <i class="fa-solid fa-heart"></i>
-          <i class="fa-solid fa-ranking-star"></i>
-          <i class="fa-solid fa-comment"></i>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a>
-        <i class="pin"></i>
-        <p>URL:</p>
-        <p>Title:</p>
-        <p>Description:</p>
-        <div class="icon">
-          <i class="fa-solid fa-heart"></i>
-          <i class="fa-solid fa-ranking-star"></i>
-          <i class="fa-solid fa-comment"></i>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a>
-        <i class="pin"></i>
-        <p>URL:</p>
-        <p>Title:</p>
-        <p>Description:</p>
-        <div class="icon">
-          <i class="fa-solid fa-heart"></i>
-          <i class="fa-solid fa-ranking-star"></i>
-          <i class="fa-solid fa-comment"></i>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a>
-        <i class="pin"></i>
-        <p>URL:</p>
-        <p>Title:</p>
-        <p>Description:</p>
-        <div class="icon">
-          <i class="fa-solid fa-heart"></i>
-          <i class="fa-solid fa-ranking-star"></i>
-          <i class="fa-solid fa-comment"></i>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a>
-        <i class="pin"></i>
-        <p>URL:</p>
-        <p>Title:</p>
-        <p>Description:</p>
-        <div class="icon">
-          <i class="fa-solid fa-heart"></i>
-          <i class="fa-solid fa-ranking-star"></i>
-          <i class="fa-solid fa-comment"></i>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a>
-        <i class="pin"></i>
-        <p>URL:</p>
-        <p>Title:</p>
-        <p>Description:</p>
-        <div class="icon">
-          <i class="fa-solid fa-heart"></i>
-          <i class="fa-solid fa-ranking-star"></i>
-          <i class="fa-solid fa-comment"></i>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a>
-        <i class="pin"></i>
-        <p>URL:</p>
-        <p>Title:</p>
-        <p>Description:</p>
-        <div class="icon">
-          <i class="fa-solid fa-heart"></i>
-          <i class="fa-solid fa-ranking-star"></i>
-          <i class="fa-solid fa-comment"></i>
-        </div>
-      </a>
-    </li>
-    <!-- <li>
-      <a>
-        <i class="pin"></i>
-        <p>URL:</p>
-        <p>Title:</p>
-        <p>Description:</p>
-        <div class="icon">
-          <i class="fa-solid fa-heart"></i>
-          <i class="fa-solid fa-ranking-star"></i>
-          <i class="fa-solid fa-comment"></i>
-        </div>
-      </a>
-    </li>
-    <li>
-      <a>
-        <i class="pin"></i>
-        <p>URL:</p>
-        <p>Title:</p>
-        <p>Description:</p>
-        <div class="icon">
-          <i class="fa-solid fa-heart"></i>
-          <i class="fa-solid fa-ranking-star"></i>
-          <i class="fa-solid fa-comment"></i>
-        </div>
-      </a>
-    </li> -->
+    <% for (const post of posts) { %>
+          
+
+        
+      <li>
+          
+        <a>
+          <i class="pin"></i>
+          <p>URL:</p>
+          <p>Title: <%= post.title %></p>
+          <p>Description:</p>
+          <div class="icon">
+            <i class="fa-solid fa-heart"></i>
+            <i class="fa-solid fa-ranking-star"></i>
+            <i class="fa-solid fa-comment"></i>
+          </div>
+        </a>
+      </li>
+  <% } %>
     
   </ul>
 
