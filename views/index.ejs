@@ -26,19 +26,19 @@
     <div class="save-search">
       <input id="tab-1" type="radio" name="tab" class="save-post" checked><label for="tab-1" class="tab">Save New Post</label>
       <input id="tab-2" type="radio" name="tab" class="search"><label for="tab-2" class="tab">Search</label>
-      <form class="form">
+      <form class="form" method="POST" action="/resources">
         <div class="save-post-htm">
           <div class="group">
             <label for="user" class="label">URL</label>
-            <input id="url" type="text" class="input">
+            <input id="url" name="url" type="text" class="input">
           </div>
           <div class="group">
             <label for="user" class="label">Title</label>
-            <input id="title" type="text" class="input" >
+            <input id="title" name="title" type="text" class="input" >
           </div>
           <div class="group">
             <label for="user" class="label">Description</label>
-            <input id="description" type="text" class="input">
+            <input id="description" name="description" type="text" class="input">
           </div>
 
           <!-- <div class="group">
