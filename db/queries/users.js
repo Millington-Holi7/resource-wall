@@ -3,13 +3,6 @@ const db = require("../connection");
 //USERS CRUD QUERIES
 
 //CREATE
-const createUser = (body) => {
-  const { email, password } = body;
-  return db.query('INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *;', [email, password])
-    .then(data => {
-      return data.rows[0];
-    });
-};
 
 ///Add a new user to the database.
 const addUser = function (user) {
@@ -36,6 +29,7 @@ const addPost = function (post) {
   return db
     .query(
       `INSERT INTO posts (user_id, topic_id, title, content_link_url, description)
+      OUTPUT inserted.topic_id
     VALUES ($1, $2, $3, $4, $5)
     RETURNING *;`,
       [user_id, topic_id, title, content_link_url, description]
@@ -49,8 +43,30 @@ const addPost = function (post) {
     });
 };
 
+const addTopic = function (options){
+  return db.query(
+    `INSERT INTO post_topics(name)`
+  )
+};
 
+const addLikePost = function (options){
+  const { user_id, post_id} = options;
+  return db
+  .query(
+    `INSERT INTO posts_likes (user_id, post_id)
+ VALUES ($1, $2)
+ RETURNING *;`,
+    [user_id, post_id]
+  )
+  .then((result) => {
+    console.log(result.rows[0]);
+    return result.rows[0];
+  })
 
+  .catch((error) => {
+    console.error(error);
+  });
+}
 const addComment = function (comment) { };
 
 const addRaiting = function (raiting) { };
@@ -98,9 +114,8 @@ const updateUser = function (userId, options) {
 const getAllPosts = function () {
   return db
     .query(
-      `SELECT posts.id title, content_link_url, description, date_posted, comments
-  return pool.query(
-    SELECT posts.id title, content_link_url, description, date_posted, comments
+      `
+    SELECT posts.id, title, content_link_url, description, date_posted, comments
   FROM posts
   RIGHT JOIN post_likes ON posts.id = post_id
   LEFT RIGHT JOIN post_likes ON posts.id = post_id
@@ -123,13 +138,22 @@ const getAllPosts = function () {
  all the post info that match the post_id in post_likes
  *
  */
-const getAllLikePosts = function () {
+const getAllLikePosts = function (userId) {
   return db.query(
     `SELECT title, content_link_url, description, date_posted, comments, likes
     FROM posts
     JOIN post_likes ON post_id = posts.id
-    JOIN post_comments ON  `
-  );
+    JOIN post_comments ON
+    WHERE id = $1 `,
+    {userId}
+  )
+  .then((result) => {
+    return result.rows;
+  })
+
+  .catch((error) => {
+    console.error(error);
+  });
 };
 
 //READ ONE
