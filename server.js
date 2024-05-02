@@ -5,7 +5,7 @@ require('dotenv').config(); //module that helps manage
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
-// const cookieSession = require("cookie-session");
+const cookieSession = require("cookie-session");
 const router  = express.Router();
 const bcrypt = require("bcryptjs");
 const userQueries = require('./db/queries/users');
@@ -34,13 +34,14 @@ app.use(express.static('public'));
 // Note: Feel free to replace the example routes below with your own
 const postRoutes = require('./routes/postRoutes');
 const userRoutes = require('./routes/userRoutes');
-
+const resourceRoutes = require('./routes/resourceRoutes');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/api/users', postRoutes);
 app.use('/users', userRoutes); //all routes for users begin with /users
+app.use('/resources', resourceRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -48,8 +49,12 @@ app.use('/users', userRoutes); //all routes for users begin with /users
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  const user = {}; //created table and put inside object every route needs this user
-  res.render('index', {user});
+  userQueries.getAllPosts()
+  .then(posts => {
+    console.log(posts)
+    const templateVars = {posts, user: 0}
+    res.render('index', templateVars);
+  })
 });
 
 app.listen(PORT, () => {
