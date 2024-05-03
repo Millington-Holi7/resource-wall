@@ -93,4 +93,11 @@ const bcryptPassword = function (password) {
   return hash;
 };
 
+router.get('/register', (req, res) => {
+  const user = {};
+  const profile_pic = ""; // Change this to the actual path
+  const templateVars = { user: user, profile_pic: profile_pic, error: undefined }; // Remove the colon after profile_pic
+  res.render('register', templateVars);
+});
+
 module.exports = router;

@@ -16,9 +16,13 @@
     <link rel="stylesheet" href="/styles/main.css" />
     <link rel="stylesheet" href="/styles/layout.css" />
     <link rel="stylesheet" href="/styles/register.css" />
+<<<<<<< HEAD
 =======
   <!-- EXTERNAL CSS -->
 >>>>>>> sql_queries
+=======
+    <link rel="stylesheet" href="/styles/nav.css" />
+>>>>>>> ee32a37e1b391169bcc8207be129767d03139eef
 
   <link rel="stylesheet" href="vendor/normalize-4.1.1.css" />
   <link rel="stylesheet" href="/vendor/border-box.css" />
@@ -35,6 +39,15 @@
     <form method="POST" action="/api/users/register">
       <div>
         <h1>Sign Up</h1>
+        <h3>Profile Picture</h3>
+        <div class="profile-pic">
+          <label class="-label" for="file">
+            <span class="glyphicon glyphicon-camera"></span>
+            <span class="change-pic">Change Image</span>
+          </label>
+          <input id="file" type="file" name="profile_pic" onchange="loadFile(event)" />
+          <img src="<%= profile_pic %>" id="output" width="200" />
+        </div>
         <h3>Username</h3>
         <input
         class="ml-auto"

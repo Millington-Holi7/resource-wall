@@ -15,7 +15,7 @@ const addUser = function (user) {
       [username, email, password]
     )
     .then((result) => {
-      console.log(result.rows[0]);
+      // console.log(result.rows[0]);
       return result.rows[0];
     })
 
@@ -35,6 +35,7 @@ const addPost = function (post) {
       [user_id, topic_id, title, content_link_url, description]
     )
     .then((result) => {
+      console.log(result.rows)
       return result.rows;
     })
 
@@ -164,8 +165,29 @@ const updateUser = function (userId, options) {
 //Add post
 //const AddNewResource = function ();
 
+// Get all posts for the main page
+const getAllPosts = function () {
+  return db
+    .query(
+      `SELECT
+      posts.*, COUNT(post_likes.*) AS likes, JSON_AGG(post_comments) AS comments
+    FROM
+      posts
+    LEFT JOIN
+      post_likes ON posts.id = post_likes.post_id
+    LEFT JOIN
+      post_comments ON posts.id = post_comments.post_id
+    GROUP BY
+      posts.id;
+      `,
+      []
+    )
+    .then((result) => {
+      console.log(result.rows[0])
+      return result.rows;
+    })
 
-
+  }
 //Get all liked posts
 /**
  *post_likes table get all liked posts
@@ -192,6 +214,24 @@ const getAllLikePosts = function (userId) {
 
 //READ ONE
 /// Users
+// Get a single user from the database given their username
+const getUserWithUsername = function(username) {
+  return db.query(
+    `SELECT * FROM users WHERE username = $1`,
+    [username]
+  )
+  .then((result) => {
+    if (result.rows.length) {
+      return result.rows[0];
+    } else {
+      return null;
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+}
+
 /// Get a single user from the database given their email.
 const getUserWithEmail = function (email) {
   return db
@@ -234,11 +274,83 @@ const getUserWithId = function (id) {
     });
 };
 
+// Get all user posts
 
+const getUserPosts = function() {
+  return db
+    .query(
+      `SELECT
+      posts.*, COUNT(post_likes.*) AS likes
+    FROM
+      posts
+    LEFT JOIN
+      post_likes ON posts.id = post_likes.post_id
+    WHERE
+      posts.user_id = 1
+    GROUP BY
+      posts.id;
+      `
+    )
+    .then((result) => {
+      console.log(result.rows)
+      return result.rows;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
 
 //UPDATE
 
-// get all posts that have the same topic
+
+
+
+
+// get all posts that have the same title
+
+const getResource = function (title) {
+
+  return db
+    .query(`
+    SELECT content_link_url, title, description, name, date_posted
+    FROM posts
+    JOIN topics ON topics.id = topic_id
+    WHERE title = $1
+    `, [title]
+    )
+    .then((res) => {
+      console.log(res.rows[0]);
+      return res.rows[0];
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+
+const getPostById = function(postId) {
+  return db
+    .query(
+      `SELECT
+      posts.*, COUNT(post_likes.*) AS likes
+    FROM
+      posts
+    LEFT JOIN
+      post_likes ON posts.id = post_likes.post_id
+    WHERE
+      posts.id = $1
+    GROUP BY
+      posts.id;
+      `, [postId]
+    )
+    .then((result) => {
+      console.log(result.rows[0])
+      return result.rows[0];
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
 
 
 // Update user info based on input into the profile page
@@ -252,8 +364,13 @@ module.exports = {
   addComment,
   addRating,
   getAllLikePosts,
+  getUserWithUsername,
   getUserWithEmail,
   getUserWithId,
   getUser,
-  updateUser
+  updateUser,
+  getUserPosts,
+  getAllPosts,
+  getPostById,
+  getResource
 };
