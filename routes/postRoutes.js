@@ -28,7 +28,6 @@ router.post("/register", (req, res) => {
   const newUser = { username, email, password: hashedPassword, profile_pic }; //DONT FORGET TO IMPLEMENT URL
   userQueries.getUserWithEmail(email).then(user => {
     if (user && user.id) {
-      //will reject
       return res.status(400).send({ message: 'email already registered' });
     }
     userQueries.addUser(newUser).then(user => {
@@ -62,7 +61,7 @@ router.post("/login", (req, res) => {
   userQueries.getUserWithEmail(email)
     .then(user => {
 
-      req.session.userId = user.id
+      req.session.user_id = user.id;
       res.redirect("/")
     })
     .catch(err => {

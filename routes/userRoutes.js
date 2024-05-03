@@ -24,16 +24,20 @@ router.use(
 
 //LOGIN ROUTES
 router.get('/login', (req, res) => { ///users/login
-  res.render('login');
+  //const user = {};
+  const templateVars = { user: null };
+  //const templateVars = { user: user, error: undefined };
+  res.render('login', templateVars);
 });
-
 
 //REGISTER ROUTES
-
-router.get('/register', (req, res) => { ///users/register
-  const user = {}
-  res.render('register', { user });
+router.get('/register', (req, res) => {
+  const user = {};
+  const profile_pic = ""; // Change this to the actual path
+  const templateVars = { user: user, profile_pic: profile_pic, error: undefined }; // Remove the colon after profile_pic
+  res.render('register', templateVars);
 });
+
 
 
 //PROFILE ROUTES
@@ -50,7 +54,7 @@ router.get('/profile', (req, res) => {
         return res.send({ error: "no user with that id" });
       }
       console.log(user.profile_pic)
-      const templateVars = { id: currentUser, username: user.username, email: user.email, password: user.password, profile_pic: user.profile_pic }
+      const templateVars = { user: currentUser, username: user.username, email: user.email, password: user.password, profile_pic: user.profile_pic }
       res.render('profile', templateVars)
     })
 });
@@ -71,19 +75,23 @@ router.post('/profile', (req, res) => {
       console.log(error)
     })
 
-res.redirect('/')
+  res.redirect('/')
 })
 
-router.post ("/:resourceId", (req,res) => {
+router.post("/:resourceId", (req, res) => {
   const { resourceId } = req.params;
 
   userQueries.getPostById(resourceId)
-  .then((data) =>{
-    const templateVars = data;
-    res.render ('resource', templateVars)
-  })
+    .then((data) => {
+      const templateVars = data;
+      res.render('resource', templateVars)
+    })
 })
 
+router.post("/logout", (req, res) => {
+  req.session = null;
+  return res.redirect(`/login`);
+});
 
 
 // enables storing passwords as hashed passwords instead of plaintext
@@ -93,11 +101,6 @@ const bcryptPassword = function (password) {
   return hash;
 };
 
-router.get('/register', (req, res) => {
-  const user = {};
-  const profile_pic = ""; // Change this to the actual path
-  const templateVars = { user: user, profile_pic: profile_pic, error: undefined }; // Remove the colon after profile_pic
-  res.render('register', templateVars);
-});
+
 
 module.exports = router;
