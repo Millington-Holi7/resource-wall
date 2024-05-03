@@ -1,10 +1,20 @@
 <header>
   <nav>
-    <h1>Resource ✹ Wall</h1>
+    <a class="nav-items" href="/users/index"><h1>Resource ✹ Wall</h1></a>
     <div class="nav-links">
-        <a class="nav-items" href="/users/login">Log in</a>
+      <% if (!user) { %>
+      <a class="nav-items" href="/users/login">Log in</a>
       <a class="nav-items" href="/users/register">Sign Up</a>
-
+      <% } else { %>
+      <p>Logged in as <span><%=user.username%></span> <%=user.profile_pic%></p>
+      <a class="nav-items" href="/resources">My Resources</a>
+      <a class="nav-items" href="/users/profile">Profile</a>
+      <form class="form-inline" action="/logout" method="POST">
+        <div class="form-group">
+          <button type="submit" class="btn btn-outline-dark">logout</button>
+        </div>
+      </form>
+      <% } %>
     </div>
   </nav>
 </header>

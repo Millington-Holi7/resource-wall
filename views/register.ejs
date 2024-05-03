@@ -10,96 +10,48 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<<<<<<< HEAD
-    <link rel="stylesheet" href="vendor/normalize-4.1.1.css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" />
-    <link rel="stylesheet" href="/styles/main.css" />
-    <link rel="stylesheet" href="/styles/layout.css" />
-    <link rel="stylesheet" href="/styles/register.css" />
-<<<<<<< HEAD
-=======
   <!-- EXTERNAL CSS -->
->>>>>>> sql_queries
-=======
-    <link rel="stylesheet" href="/styles/nav.css" />
->>>>>>> ee32a37e1b391169bcc8207be129767d03139eef
 
   <link rel="stylesheet" href="vendor/normalize-4.1.1.css" />
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/register.css" />
+  <link rel="stylesheet" href="/styles/nav.css" />
 
-<<<<<<< HEAD
-    <script src="/vendor/jquery-3.0.0.js"></script>
-    <script defer src="/scripts/users.js"></script>
-  </head>
-  <body>
-    <%- include('partials/_header') %>
-    <form method="POST" action="/api/users/register">
-      <div>
-        <h1>Sign Up</h1>
-        <h3>Profile Picture</h3>
-        <div class="profile-pic">
-          <label class="-label" for="file">
-            <span class="glyphicon glyphicon-camera"></span>
-            <span class="change-pic">Change Image</span>
-          </label>
-          <input id="file" type="file" name="profile_pic" onchange="loadFile(event)" />
-          <img src="<%= profile_pic %>" id="output" width="200" />
-        </div>
-        <h3>Username</h3>
-        <input
-        class="ml-auto"
-        type="text"
-        name="username"
-        placeholder="my-username"
-        />
-        <h3>Email address</h3>
-        <input
-        class="ml-auto"
-        type="email"
-        name="email"
-        placeholder="email@example.com"
-        />
-        <h3>Password</h3>
-        <input
-        class="ml-auto"
-        type="password"
-        name="password"
-        placeholder="Enter Password"
-        />
-=======
   <!-- EXTERNAL JAVASCRIPT -->
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/users.js"></script>
 </head>
->>>>>>> sql_queries
 
 <body>
-  <nav>
-    <h1>Resource ✹ Wall</h1>
-    <div class="nav-links">
-      <a class="nav-items" href="/users/login">Log in</a>
-    </div>
-  </nav>
-  <form action="/api/users" method="POST">
-    <div>
-      <h1>Sign Up</h1>
-      <h3>Email address</h3>
-      <input class="ml-auto" type="email" name="email" placeholder="email@example.com" />
-      <h3>Password</h3>
-      <input class="ml-auto" type="password" name="password" placeholder="Enter Password" />
+  <%- include('partials/_header') %>
+    <form method="POST" action="/api/users/register">
+      <div>
+        <h1>Sign Up</h1>
+        <h3>Profile Picture</h3>
+          <div class="upload_image">
+            <label class="-label" for="file">
+              <h3>Change Image</h3>
+            </label>
+            <input class="ml-auto" type="url" name="profile_pic" placeholder="upload a url" />
+          </div>
+          <h3>Username</h3>
+          <input class="ml-auto" type="text" name="username" placeholder="my-username" />
+          <h3>Email address</h3>
+          <input class="ml-auto" type="email" name="email" placeholder="email@example.com" />
+          <h3>Password</h3>
+          <input class="ml-auto" type="password" name="password" placeholder="Enter Password" />
 
-      <h3>Confirm Password</h3>
-      <input class="ml-auto" type="password" name="confirmPassword" placeholder="Confirm Password" />
-      <div class="register">
-        <button class="signup-btn" type="submit">Register</button>
-        <a href="/users/login">Cancel</a>
-      </div>
-    </div>
-  </form>
+          <h3>Confirm Password</h3>
+          <input class="ml-auto" type="password" name="confirmPassword" placeholder="Confirm Password" />
+          <div class="register">
+            <button class="signup-btn" type="submit">Register</button>
+            <a href="/users/login">Cancel</a>
+          </div>
+        </div>
+    </form>
 </body>
 
 </html>

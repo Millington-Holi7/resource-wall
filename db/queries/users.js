@@ -24,15 +24,15 @@ const addUser = function (user) {
     });
 };
 
-const addPost = function (post, userId) {
-  const { topic_id, title, content_link_url, description } = post;
+const addPost = function (post) {
+  const { user_id, topic_id, title, content_link_url, description } = post;
   return db
     .query(
       `INSERT INTO posts (user_id, topic_id, title, content_link_url, description)
       OUTPUT inserted.topic_id
     VALUES ($1, $2, $3, $4, $5)
     RETURNING *;`,
-      [userId, topic_id, title, content_link_url, description]
+      [user_id, topic_id, title, content_link_url, description]
     )
     .then((result) => {
       console.log(result.rows)
@@ -44,87 +44,33 @@ const addPost = function (post, userId) {
     });
 };
 
-const addTopic = function (options) {
+const addTopic = function (options){
   return db.query(
     `INSERT INTO post_topics(name)`
   )
 };
 
-
-const addComment = function (userId, postId, comments) {
-
+const addLikePost = function (options){
+  const { user_id, post_id} = options;
   return db
-    .query(
-      `INSERT INTO post_comments (user_id, post_id, comments)
- VALUES ($1, $2, $3)
- RETURNING *;`,
-      [userId, postId, comments]
-    )
-    .then((result) => {
-      console.log(result.rows);
-      return result.rows;
-    })
-
-    .catch((error) => {
-      console.error(error);
-    });
-};
-const getComments = function (userId) {
-  return db.query(
-    `SELECT  `
-  )
-}
-const addRating = function (options) {
-  const { user_id, post_id, rating } = options;
-  return db
-    .query(
-      `INSERT INTO posts_ratings (user_id, post_id, rating)
- VALUES ($1, $2, $3)
- RETURNING *;`,
-      [user_id, post_id, rating]
-    )
-    .then((result) => {
-      return result.rows;
-    })
-
-    .catch((error) => {
-      console.error(error);
-    });
-};
-
-const addLike = function (options) {
-  const { user_id, post_id } = options;
-  return db
-    .query(
-      `INSERT INTO posts_likes (user_id, post_id)
+  .query(
+    `INSERT INTO posts_likes (user_id, post_id)
  VALUES ($1, $2)
  RETURNING *;`,
-      [user_id, post_id]
-    )
-    .then((result) => {
-      console.log(result.rows[0]);
-      return result.rows[0];
-    })
-
-    .catch((error) => {
-      console.error(error);
-    });
-}
-
-const removeLike = function (userId, resourceId) { //resourceId= post.id
-  return db.query(
-    `DELETE FROM post_likes
-  WHERE user_id = $1 AND post_id = $2;`,
-    [userId, resourceId]
+    [user_id, post_id]
   )
-    .then(() => { //need to finish
-      return
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-}
+  .then((result) => {
+    console.log(result.rows[0]);
+    return result.rows[0];
+  })
 
+  .catch((error) => {
+    console.error(error);
+  });
+}
+const addComment = function (comment) { };
+
+const addRaiting = function (raiting) { };
 
 //READ ALL
 const getUser = (userId) => {
@@ -187,7 +133,11 @@ const getAllPosts = function () {
       return result.rows;
     })
 
-}
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
 //Get all liked posts
 /**
  *post_likes table get all liked posts
@@ -201,35 +151,35 @@ const getAllLikePosts = function (userId) {
     JOIN post_likes ON post_id = posts.id
     JOIN post_comments ON
     WHERE id = $1 `,
-    { userId }
+    {userId}
   )
-    .then((result) => {
-      return result.rows;
-    })
+  .then((result) => {
+    return result.rows;
+  })
 
-    .catch((error) => {
-      console.error(error);
-    });
+  .catch((error) => {
+    console.error(error);
+  });
 };
 
 //READ ONE
 /// Users
 // Get a single user from the database given their username
-const getUserWithUsername = function (username) {
+const getUserWithUsername = function(username) {
   return db.query(
     `SELECT * FROM users WHERE username = $1`,
     [username]
   )
-    .then((result) => {
-      if (result.rows.length) {
-        return result.rows[0];
-      } else {
-        return null;
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  .then((result) => {
+    if (result.rows.length) {
+      return result.rows[0];
+    } else {
+      return null;
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 }
 
 /// Get a single user from the database given their email.
@@ -276,22 +226,20 @@ const getUserWithId = function (id) {
 
 // Get all user posts
 
-const getUserPosts = function (userId) {
+const getUserPosts = function() {
   return db
     .query(
       `SELECT
-      posts.*, COUNT(post_likes.*) AS likes, JSON_AGG(post_comments) AS comments
+      posts.*, COUNT(post_likes.*) AS likes
     FROM
       posts
     LEFT JOIN
       post_likes ON posts.id = post_likes.post_id
-      LEFT JOIN
-      post_comments ON posts.id = post_comments.post_id
     WHERE
-      posts.user_id = $1
+      posts.user_id = 1
     GROUP BY
       posts.id;
-      `, [userId]
+      `
     )
     .then((result) => {
       console.log(result.rows)
@@ -330,7 +278,7 @@ const getResource = function (title) {
 };
 
 
-const getPostById = function (postId) {
+const getPostById = function(postId) {
   return db
     .query(
       `SELECT
@@ -362,9 +310,9 @@ const getPostById = function (postId) {
 module.exports = {
   addUser,
   addPost,
-  addLike,
+  //addLike,
   addComment,
-  addRating,
+  addRaiting,
   getAllLikePosts,
   getUserWithUsername,
   getUserWithEmail,
