@@ -190,32 +190,25 @@ const getUserPosts = function() {
 
 
 
-// get all posts that have the same topic
+// get all posts that have the same title
 
-const getResource = function (options) {
+const getResource = function (title) {
 
-  const queryParams = [];
-  let queryString = `
-  SELECT content_link_url, title, description, name
-  FROM posts
-  JOIN topics ON topics.id = topic_id
-  WHERE 1=1
-  `;
-  if (options.content_link_url) {
-    queryParams.push(options.content_link_url);
-    queryString += `AND content_link_url = $${queryParams.length} `;
-  }
-  if (options.title) {
-    queryParams.push(options.title);
-    queryString += `AND title = $${queryParams.length}`;
-  }
-  if (options.name) {
-    queryParams.push(options.name);
-    queryString += `AND name = $${queryParams.length}`;
-  }
-  
-  console.log(res.rows)
-  return pool.query(queryString, queryParams).then((res) => res.rows);
+  return db
+    .query(`
+    SELECT content_link_url, title, description, name, date_posted
+    FROM posts
+    JOIN topics ON topics.id = topic_id
+    WHERE title = $1
+    `, [title]
+    )
+    .then((res) => {
+      console.log(res.rows[0]);
+      return res.rows[0];
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 };
 
 
@@ -260,5 +253,6 @@ module.exports = {
   getUsers,
   getUserPosts,
   getAllPosts,
-  getPostById
+  getPostById,
+  getResource
 };
