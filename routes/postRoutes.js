@@ -42,10 +42,6 @@ router.post("/register", (req, res) => {
   });
 });
 
-router.post("/login", (req, res) => {
-  const { username, email, password } = req.body;
-  
-})
 
 //READ ALL - GET /
 router.get('/', (req, res) => {
@@ -61,6 +57,21 @@ router.get('/', (req, res) => {
 });
 
 // //READ ONE - GET /:id
+router.post("/login", (req, res) => {
+  const { username, email, password } = req.body;
+
+  userQueries.getUserWithEmail(email)
+  .then(user => {
+
+    req.session.userId = user.id
+    res.redirect("/")
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect("/login")
+  })
+
+})
 // router.get('/:id', (req, res) => {
 //
 // })
