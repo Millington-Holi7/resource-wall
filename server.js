@@ -5,10 +5,11 @@ require('dotenv').config(); //module that helps manage
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
-// const cookieSession = require("cookie-session");
+const cookieSession = require("cookie-session");
+
 // const router  = express.Router();
 // const bcrypt = require("bcryptjs");
-// const userQueries = require('./db/queries/users');
+const userQueries = require('./db/queries/users');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -30,6 +31,14 @@ app.use(
 );
 app.use(express.static('public'));
 
+app.use(
+  cookieSession({
+    //
+    name: "session", //name could be anything but make sure context is there
+    keys: ["key1", "key2"],
+
+  })
+);
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const postRoutes = require('./routes/postRoutes');
@@ -50,11 +59,11 @@ app.use('/resources', resourceRoutes);
 
 app.get('/', (req, res) => {
   userQueries.getAllPosts()
-  .then(posts => {
-    console.log(posts)
-    const templateVars = {posts, user: 0}
-    res.render('index', templateVars);
-  })
+    .then(posts => {
+      console.log(posts)
+      const templateVars = { posts, user: 0 }
+      res.render('index', templateVars);
+    })
 });
 
 app.listen(PORT, () => {

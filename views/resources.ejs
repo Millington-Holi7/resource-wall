@@ -54,11 +54,13 @@
           </div>
         </a>
         <div class="comment_section">
-          for (const comment of post.comments){
-          <p>
-            <%= comments[comment] %>
-          </p>
-          }
+          <% for (const comment of post.comments){ %>
+            <% if (comment){ %>
+              <p>
+                <%= comment.comments %>
+              </p>
+              <% } %>
+                <% } %>
         </div>
       </li>
       <% } %>

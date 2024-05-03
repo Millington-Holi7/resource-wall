@@ -10,54 +10,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<<<<<<< HEAD
-    <link rel="stylesheet" href="vendor/normalize-4.1.1.css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" />
-    <link rel="stylesheet" href="/styles/main.css" />
-    <link rel="stylesheet" href="/styles/layout.css" />
-    <link rel="stylesheet" href="/styles/login.css" />
-<<<<<<< HEAD
-=======
   <!-- EXTERNAL CSS -->
->>>>>>> sql_queries
-=======
-    <link rel="stylesheet" href="/styles/nav.css" />
->>>>>>> ee32a37e1b391169bcc8207be129767d03139eef
 
   <link rel="stylesheet" href="vendor/normalize-4.1.1.css" />
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/login.css" />
+  <link rel="stylesheet" href="/styles/nav.css" />
 
-<<<<<<< HEAD
-    <script src="/vendor/jquery-3.0.0.js"></script>
-    <script defer src="/scripts/users.js"></script>
-  </head>
-  <body>
-    <%- include('partials/_header') %>
-    <form action="/api/users/login" method="POST">
-      <div>
-        <h1>Login</h1>
-        <h3>Username</h3>
-        <input
-        class="ml-auto"
-        type="username"
-        name="username"
-        placeholder="my-username"
-        />
-        <h3>Password</h3>
-        <input
-        class="ml-auto"
-        type="password"
-        name="password"
-        placeholder="Enter Password"
-        />
-        <div class="login-signup">
-          <button class="login-btn" type="submit">Log in</button>
-          <p>Don't have an account?<a href="/users/register" class="signin-btn">Sign up</a></p>
-        </div>
-=======
   <!-- EXTERNAL JAVASCRIPT -->
 
   <script src="/vendor/jquery-3.0.0.js"></script>
@@ -65,26 +26,20 @@
 </head>
 
 <body>
-  <nav>
-    <h1>Resource ✹ Wall</h1>
-    <div class="nav-links">
-      <a class="nav-items" href="/users/register">Sign Up</a>
-    </div>
-  </nav>
-  <form action="/login" method="POST">
-    <div>
-      <h1>Login</h1>
-      <h3>Email address</h3>
-      <input class="ml-auto" type="email" name="email" placeholder="email@example.com" />
-      <h3>Password</h3>
-      <input class="ml-auto" type="password" name="password" placeholder="Enter Password" />
-      <div class="login-signup">
-        <button class="login-btn" type="submit">Log in</button>
-        <p>Don't have an account?<a href="/users/register" class="signin-btn">Sign up</a></p>
->>>>>>> sql_queries
+  <%- include('partials/_header') %>
+    <form action="/api/users/login" method="POST">
+      <div>
+        <h1>Login</h1>
+        <h3>Email</h3>
+        <input class="ml-auto" type="email" name="email" placeholder="my-email" />
+        <h3>Password</h3>
+        <input class="ml-auto" type="password" name="password" placeholder="Enter Password" />
+        <div class="login-signup">
+          <button class="login-btn" type="submit">Log in</button>
+          <p>Don't have an account?<a href="/users/register" class="signin-btn">Sign up</a></p>
+        </div>
       </div>
-    </div>
-  </form>
+    </form>
 </body>
 
 </html>

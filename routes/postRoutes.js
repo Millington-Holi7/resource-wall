@@ -6,7 +6,7 @@
  */
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 const userQueries = require('../db/queries/users');
 //const cookieSession = require("cookie-session");
 
@@ -25,14 +25,14 @@ const userQueries = require('../db/queries/users');
 router.post("/register", (req, res) => {
   const { username, email, password, profile_pic } = req.body;
   const hashedPassword = bcrypt.hashSync(password, 10); // Hash the password
-  const newUser = {username, email, password: hashedPassword, profile_pic}; //DONT FORGET TO IMPLEMENT URL
+  const newUser = { username, email, password: hashedPassword, profile_pic }; //DONT FORGET TO IMPLEMENT URL
   userQueries.getUserWithEmail(email).then(user => {
-    if (user && user.id){
+    if (user && user.id) {
       //will reject
-      return res.status(400).send({message: 'email already registered'});
+      return res.status(400).send({ message: 'email already registered' });
     }
     userQueries.addUser(newUser).then(user => {
-      if (user && user.id){
+      if (user && user.id) {
         console.log(req.body);
         req.session.user_id = user.id;
         res.redirect("/");
@@ -60,15 +60,15 @@ router.post("/login", (req, res) => {
   const { username, email, password } = req.body;
 
   userQueries.getUserWithEmail(email)
-  .then(user => {
+    .then(user => {
 
-    req.session.userId = user.id
-    res.redirect("/")
-  })
-  .catch(err => {
-    console.log(err)
-    res.redirect("/login")
-  })
+      req.session.userId = user.id
+      res.redirect("/")
+    })
+    .catch(err => {
+      console.log(err)
+      res.redirect("/users/login")
+    })
 
 })
 // router.get('/:id', (req, res) => {
@@ -88,11 +88,11 @@ router.post("/login", (req, res) => {
 
 // CREATE POST
 router.post('/create-post', (req, res) => {
-  userQueries.addPost(req.body)
+  userQueries.addPost(req.body, req.session.userId)
   res.redirect('/resources');
 })
 
-// SEARCH 
+// SEARCH
 router.post('/search', (req, res) => {
   console.log(req.body);
   userQueries.getResource(req.body)
