@@ -62,7 +62,7 @@ router.post('/profile', (req, res) => {
   const hash = bcryptPassword(password)
   const options = { username, email, password: hash, profile_pic }
   console.log(`***`, options)
-  //Query the database to get the most updated info of user (userQueries.getUser)
+
   userQueries.updateUser(currentUser, options)
     .then(() => {
       console.log('successful')
@@ -71,8 +71,20 @@ router.post('/profile', (req, res) => {
       console.log(error)
     })
 
-
+res.redirect('/')
 })
+
+router.post ("/:resourceId", (req,res) => {
+  const { resourceId } = req.params;
+
+  userQueries.getPostById(resourceId)
+  .then((data) =>{
+    const templateVars = data;
+    res.render ('resource', templateVars)
+  })
+})
+
+
 
 // enables storing passwords as hashed passwords instead of plaintext
 const bcryptPassword = function (password) {

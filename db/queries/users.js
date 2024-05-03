@@ -49,7 +49,49 @@ const addTopic = function (options){
   )
 };
 
-const addLikePost = function (options){
+
+const addComment = function (userId, postId, comments) {
+
+  return db
+  .query(
+    `INSERT INTO post_comments (user_id, post_id, comments)
+ VALUES ($1, $2, $3)
+ RETURNING *;`,
+    [userId, postId, comments]
+  )
+  .then((result) => {
+    console.log(result.rows);
+    return result.rows;
+  })
+
+  .catch((error) => {
+    console.error(error);
+  });
+ };
+const getComments = function (userId) {
+  return db.query(
+    `SELECT  `
+  )
+}
+const addRating = function (options) {
+  const { user_id, post_id, rating} = options;
+  return db
+  .query(
+    `INSERT INTO posts_ratings (user_id, post_id, rating)
+ VALUES ($1, $2, $3)
+ RETURNING *;`,
+    [user_id, post_id, rating]
+  )
+  .then((result) => {
+    return result.rows;
+  })
+
+  .catch((error) => {
+    console.error(error);
+  });
+ };
+
+ const addLike = function (options){
   const { user_id, post_id} = options;
   return db
   .query(
@@ -67,9 +109,21 @@ const addLikePost = function (options){
     console.error(error);
   });
 }
-const addComment = function (comment) { };
 
-const addRaiting = function (raiting) { };
+ const removeLike = function (userId, resourceId){ //resourceId= post.id
+  return db.query(
+  `DELETE FROM post_likes
+  WHERE user_id = $1 AND post_id = $2;`,
+  [userId, resourceId]
+  )
+  .then(() => { //need to finish
+    return
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+  }
+
 
 //READ ALL
 const getUser = (userId) => {
@@ -110,27 +164,7 @@ const updateUser = function (userId, options) {
 //Add post
 //const AddNewResource = function ();
 
-// Get all posts for the main page
-const getAllPosts = function () {
-  return db
-    .query(
-      `
-    SELECT posts.id, title, content_link_url, description, date_posted, comments
-  FROM posts
-  RIGHT JOIN post_likes ON posts.id = post_id
-  LEFT RIGHT JOIN post_likes ON posts.id = post_id
-  LEFT JOIN post_comments ON posts.id = post_comments.post_id posts.id = post_comments.post_id
-  ORDER BY date_posted;`,
-      []
-    )
-    .then((result) => {
-      return result.rows;
-    })
 
-    .catch((error) => {
-      console.error(error);
-    });
-};
 
 //Get all liked posts
 /**
@@ -200,6 +234,8 @@ const getUserWithId = function (id) {
     });
 };
 
+
+
 //UPDATE
 
 // get all posts that have the same topic
@@ -212,9 +248,9 @@ const getUserWithId = function (id) {
 module.exports = {
   addUser,
   addPost,
-  //addLike,
+  addLike,
   addComment,
-  addRaiting,
+  addRating,
   getAllLikePosts,
   getUserWithEmail,
   getUserWithId,
