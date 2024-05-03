@@ -23,30 +23,24 @@ const userQueries = require('../db/queries/users');
 
 //CREATE - POST /
 router.post("/register", (req, res) => {
-  // console.log('______________________', req.body);
-  const {username, email, password, profile_pic } = req.body;
-
-
-  const newUser = {username, email, password, profile_pic}; //DONT FORGET TO IMPLEMENT URL
-
+  const { username, email, password, profile_pic } = req.body;
+  const hashedPassword = bcrypt.hashSync(password, 10); // Hash the password
+  const newUser = {username, email, password: hashedPassword, profile_pic}; //DONT FORGET TO IMPLEMENT URL
   userQueries.getUserWithEmail(email).then(user => {
     if (user && user.id){
       //will reject
-      return res.status(400).send({message: 'email already registered'})
+      return res.status(400).send({message: 'email already registered'});
     }
-
     userQueries.addUser(newUser).then(user => {
       if (user && user.id){
-        req.session.user_id = user.id
+        console.log(req.body);
+        req.session.user_id = user.id;
         res.redirect("/");
       }
-      // console.log('+++++++++++++++++++', user);
-    })
-  })
-  //call user queries.getUserWithEmail to check if the email exists
-  // if the user email exists
-
+    });
+  });
 });
+
 
 //READ ALL - GET /
 router.get('/', (req, res) => {
@@ -62,6 +56,21 @@ router.get('/', (req, res) => {
 });
 
 // //READ ONE - GET /:id
+router.post("/login", (req, res) => {
+  const { username, email, password } = req.body;
+
+  userQueries.getUserWithEmail(email)
+  .then(user => {
+
+    req.session.userId = user.id
+    res.redirect("/")
+  })
+  .catch(err => {
+    console.log(err)
+    res.redirect("/login")
+  })
+
+})
 // router.get('/:id', (req, res) => {
 //
 // })

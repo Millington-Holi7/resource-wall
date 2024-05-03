@@ -15,7 +15,7 @@ const addUser = function (user) {
       [username, email, password]
     )
     .then((result) => {
-      console.log(result.rows[0]);
+      // console.log(result.rows[0]);
       return result.rows[0];
     })
 
@@ -158,6 +158,24 @@ const getAllLikePosts = function (userId) {
 
 //READ ONE
 /// Users
+// Get a single user from the database given their username
+const getUserWithUsername = function(username) {
+  return db.query(
+    `SELECT * FROM users WHERE username = $1`,
+    [username]
+  )
+  .then((result) => {
+    if (result.rows.length) {
+      return result.rows[0];
+    } else {
+      return null;
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+  });
+}
+
 /// Get a single user from the database given their email.
 const getUserWithEmail = function (email) {
   return db
@@ -216,6 +234,7 @@ module.exports = {
   addComment,
   addRaiting,
   getAllLikePosts,
+  getUserWithUsername,
   getUserWithEmail,
   getUserWithId,
   getUser,

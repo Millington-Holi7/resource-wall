@@ -8,15 +8,25 @@
   --cancel-color: #cb0000;
 }
 
+header{
+  width:100vw;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 nav{
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 200px;
+  height: 100%;
   background-color: var(--nav-color);
   color: #ffffff;
   align-self: flex-start;
+  padding:2%;
 
   h1{
     margin: 0 2%;
