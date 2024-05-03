@@ -33,9 +33,10 @@
           
         <a>
           <i class="pin"></i>
-          <p>URL:</p>
+          <p>URL: <%= post.content_link_url %></p>
           <p>Title: <%= post.title %></p>
-          <p>Description:</p>
+          <p>Description: <%= post.description %></p>
+          <p>Topic: <%= post.topic %></p>
           <div class="icon">
             <i class="fa-solid fa-heart"></i>
             <i class="fa-solid fa-ranking-star"></i>
