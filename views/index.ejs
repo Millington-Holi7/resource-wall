@@ -79,8 +79,6 @@
                 <label for="user" class="label">title</label>
                 <input id="title1" type="user" class="input">
               </div>
-              
-
               <div class="group">
                 <button type="submit" class="button">Search</button>
               </div>
@@ -96,10 +94,7 @@
       <ul> 
         <% for (const post of posts) { %>
           
-
-        
         <li>
-            
           <a>
             <i class="pin"></i>
             <p>URL: <%= post.content_link_url %></p>
@@ -107,6 +102,7 @@
             <p>Description: <%= post.description %></p>
             <p>Topic: <%= post.topic %></p>
             <div class="icon">
+              <span> <%= post.date_posted %></span>
               <i class="fa-solid fa-heart"></i>
               <i class="fa-solid fa-ranking-star"></i>
               <i class="fa-solid fa-comment"></i>
@@ -115,11 +111,7 @@
         </li>
     <% } %>
     
-        
-
       </ul>
-
-
 
     </div>
 
