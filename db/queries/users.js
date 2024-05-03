@@ -3,16 +3,10 @@ const db = require("../connection");
 //USERS CRUD QUERIES
 
 //CREATE
-const createUser = (body) => {
-  const { email, password } = body;
-  return db.query('INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *;', [email, password])
-    .then(data => {
-      return data.rows[0];
-    });
-};
+
 ///Add a new user to the database.
 const addUser = function (user) {
-  const {  username, email, password  } = user;
+  const { username, email, password } = user;
   return db
     .query(
       `INSERT INTO users (username, email, password)
@@ -35,6 +29,7 @@ const addPost = function (post) {
   return db
     .query(
       `INSERT INTO posts (user_id, topic_id, title, content_link_url, description)
+      OUTPUT inserted.topic_id
     VALUES ($1, $2, $3, $4, $5)
     RETURNING *;`,
       [user_id, topic_id, title, content_link_url, description]
@@ -48,17 +43,44 @@ const addPost = function (post) {
     });
 };
 
-///Add a new user to the database. REgister page
-const addUser = function (user) {
-  const { name, email, password, profile_pic_url } = user;
-  return pool.query(
-    `INSERT INTO users (name, email, password, profile_pic_url)
-   VALUES ($1, $2, $3, $4)
-   RETURNING *;`,
-    [name, email, password, profile_pic_url]
+const addTopic = function (options){
+  return db.query(
+    `INSERT INTO post_topics(name)`
   )
-    .then((result) => {
-      return result.rows;
+};
+
+const addLikePost = function (options){
+  const { user_id, post_id} = options;
+  return db
+  .query(
+    `INSERT INTO posts_likes (user_id, post_id)
+ VALUES ($1, $2)
+ RETURNING *;`,
+    [user_id, post_id]
+  )
+  .then((result) => {
+    console.log(result.rows[0]);
+    return result.rows[0];
+  })
+
+  .catch((error) => {
+    console.error(error);
+  });
+}
+const addComment = function (comment) { };
+
+const addRaiting = function (raiting) { };
+
+//READ ALL
+const getUser = (userId) => {
+  return db.query(
+    `SELECT *
+    FROM users
+    WHERE id = $1
+    ;`, [userId])
+
+    .then((data) => {
+      return data.rows[0];
     })
 
     .catch((error) => {
@@ -66,32 +88,34 @@ const addUser = function (user) {
     });
 };
 
-const addComment = function (comment) {};
-
-const addRaiting = function (raiting) {};
-
-//READ ALL
-const getUsers = () => {
-  return db.query(`SELECT * FROM users;`).then((data) => {
-    return data.rows;
-  });
-};
-
 // Update user
-const updateUser = function (option){
-  `UPDATE users`
+const updateUser = function (userId, options) {
+  let promise = Promise.resolve()
+  for (const key in options) {
+    if (options[key]) {
+      promise = promise.then(() => {
+
+        return db.query(
+          `UPDATE users
+    SET ${key} = $1
+    WHERE id = $2;`,
+          [options[key], userId]
+        )
+      })
+    }
+  }
+  return promise;
 }
 ///Posts
 //Add post
-const AddNewResource = function ();
+//const AddNewResource = function ();
 
 // Get all posts for the main page
 const getAllPosts = function () {
   return db
     .query(
-      `SELECT posts.id title, content_link_url, description, date_posted, comments
-  return pool.query(
-    `SELECT posts.id title, content_link_url, description, date_posted, comments
+      `
+    SELECT posts.id, title, content_link_url, description, date_posted, comments
   FROM posts
   RIGHT JOIN post_likes ON posts.id = post_id
   LEFT RIGHT JOIN post_likes ON posts.id = post_id
@@ -114,13 +138,22 @@ const getAllPosts = function () {
  all the post info that match the post_id in post_likes
  *
  */
-const getAllLikePosts = function () {
+const getAllLikePosts = function (userId) {
   return db.query(
     `SELECT title, content_link_url, description, date_posted, comments, likes
     FROM posts
     JOIN post_likes ON post_id = posts.id
-    JOIN post_comments ON  `
-  );
+    JOIN post_comments ON
+    WHERE id = $1 `,
+    {userId}
+  )
+  .then((result) => {
+    return result.rows;
+  })
+
+  .catch((error) => {
+    console.error(error);
+  });
 };
 
 //READ ONE
@@ -174,18 +207,17 @@ const getUserWithId = function (id) {
 
 // Update user info based on input into the profile page
 
-const updateUser = function(options){
 
-}
 
 module.exports = {
   addUser,
   addPost,
-  addLike,
+  //addLike,
   addComment,
   addRaiting,
   getAllLikePosts,
   getUserWithEmail,
   getUserWithId,
-  getUsers,
+  getUser,
+  updateUser
 };

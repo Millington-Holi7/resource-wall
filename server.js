@@ -5,10 +5,10 @@ require('dotenv').config(); //module that helps manage
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
-const cookieSession = require("cookie-session");
-const router  = express.Router();
-const bcrypt = require("bcryptjs");
-const userQueries = require('./db/queries/users');
+// const cookieSession = require("cookie-session");
+// const router  = express.Router();
+// const bcrypt = require("bcryptjs");
+// const userQueries = require('./db/queries/users');
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -47,11 +47,8 @@ app.use('/users', userRoutes); //all routes for users begin with /users
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-app.get('/', (req, res) => {
-  const user = {}; //created table and put inside object every route needs this user
-  res.render('index', {user});
+app.listen(PORT, () => {
+  console.log("Example app listening on port " + PORT);
 });
 
-app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
-});
+module.exports = app;

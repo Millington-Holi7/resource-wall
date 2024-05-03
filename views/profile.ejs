@@ -25,25 +25,27 @@
 
 <body>
 
-  <form action="/profile" method="POST">
+  <form action="/users/profile" method="POST">
     <div>
       <h1>Update user profile</h1>
       <div class="profile-pic">
-        <label class="-label" for="file">
-          <span class="glyphicon glyphicon-camera"></span>
-          <span>Change Image</span>
-        </label>
-        <input id="file" type="file" onchange="loadFile(event)" />
-        <img src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg" id="output" width="200" />
+        <img src="<%= profile_pic %>" id="output" width="200" />
+        <div class="upload_image">
+          <label class="-label" for="file">
+            <span class="glyphicon glyphicon-camera"></span>
+            <h3>Change Image</h3>
+          </label>
+          <input class="ml-auto" type="url" name="profile_pic" placeholder="upload a url" />
+        </div>
       </div>
       <h3>Username</h3>
-      <input class="ml-auto" type="name" name="name" placeholder="" />
+      <input class="ml-auto" type="name" name="username" placeholder="<%= username %>" />
       <h3>Email address</h3>
-      <input class="ml-auto" type="email" name="email" placeholder="email@example.com" />
+      <input class="ml-auto" type="email" name="email" placeholder="<%= email %>" />
       <h3>Password</h3>
       <input class="ml-auto" type="password" name="password" placeholder="Enter Password" />
-      <h3>Change Post-it colour</h3>
-      <input type="color" id="colorpicker" value="#0000ff">
+      <!-- <h3>Change Post-it colour</h3>
+      <input type="color" id="colorpicker" value="#0000ff"> -->
       <div class="login-signup">
         <button class="btn" type="submit">Save</button>
       </div>
