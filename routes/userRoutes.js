@@ -18,7 +18,7 @@ router.use(
     //
     name: "cookiez", //name could be anything but make sure context is there
     keys: ["key1", "key2"],
-    
+
   })
 );
 
@@ -30,10 +30,11 @@ router.get('/login', (req, res) => { ///users/login
 
 //REGISTER ROUTES
 
-router.get('/register', (req, res) => { ///users/register
-  const user = {}
-  res.render('register', {user});
+router.get('/register', (req, res) => {
+  const user = {};
+  const profile_pic = ""; // Change this to the actual path
+  const templateVars = { user: user, profile_pic: profile_pic, error: undefined }; // Remove the colon after profile_pic
+  res.render('register', templateVars);
 });
-
 
 module.exports = router;
