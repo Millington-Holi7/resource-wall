@@ -15,7 +15,9 @@
   <link rel="stylesheet" href="/styles/nav.css" />
   <link rel="stylesheet" href="/styles/index.css" />
   <link href="https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
@@ -23,160 +25,148 @@
 
 <body>
   <%- include('partials/_header') %>
-  <div>
-  <div class="main-wrap">
-    <div class="save-search">
-      <input id="tab-1" type="radio" name="tab" class="save-post" checked><label for="tab-1" class="tab">Save New Post</label>
-      <input id="tab-2" type="radio" name="tab" class="search"><label for="tab-2" class="tab">Search</label>
-      <form class="form" method="POST" action="/resources">
-        <div class="save-post-htm">
-          <div class="group">
-            <label for="user" class="label">URL</label>
-            <input id="url" name="url" type="text" class="input">
-          </div>
-          <div class="group">
-            <label for="user" class="label">Title</label>
-            <input id="title" name="title" type="text" class="input" >
-          </div>
-          <div class="group">
-            <label for="user" class="label">Description</label>
-            <input id="description" name="description" type="text" class="input">
-          </div>
+    <div>
+      <div class="main-wrap">
+        <div class="save-search">
+          <input id="tab-1" type="radio" name="tab" class="save-post" checked><label for="tab-1" class="tab">Save New
+            Post</label>
+          <input id="tab-2" type="radio" name="tab" class="search"><label for="tab-2" class="tab">Search</label>
+          <div class="form">
+            <form method="POST" action="/api/users/create-post">
+              <div class="save-post-htm">
+                <div class="group">
+                  <label for="user" class="label">URL</label>
+                  <input id="url" name="content_link_url" type="text" class="input">
+                </div>
+                <div class="group">
+                  <label for="user" class="label">Title</label>
+                  <input id="title" name="title" type="text" class="input">
+                </div>
+                <div class="group">
+                  <label for="user" class="label">Description</label>
+                  <input id="description" name="description" type="text" class="input">
+                </div>
 
-          <!-- <div class="group">
+                <!-- <div class="group">
             <label for="user" class="label">topic</label>
             <input id="topic" type="text" class="input">
           </div> -->
-          <div class="group">
-            <label for="user" class="label">topic</label>
-          <select name="topic" class="input">
-            <option value="">Select a topic</option>
-            <option value="computers">Art</option>
-            <option value="computers">Computers</option>
-            <option value="computers">Animals</option>
-            <option value="computers">Food And Drink</option>
-            <option value="computers">Home Decor</option>
-            <option value="computers">Video Games</option>
-            <option value="computers">Fashion</option>
-            <option value="computers">Travel</option>
-          </select>
-          <input type="text" name="newTopic" class="input">
+                <div class="login-wrap">
+                  <div class="login-html">
+                    <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1"
+                      class="tab">Save New
+                      Post</label>
+                    <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2"
+                      class="tab">Search</label>
+                    <div class="login-form">
+                      <div class="sign-in-htm">
+                        <div class="group">
+                          <label for="user" class="label">URL</label>
+                          <input id="user" type="text" class="input">
+                        </div>
+                        <div class="group">
+                          <label for="pass" class="label">Title</label>
+                          <input id="pass" type="text" class="input" data-type="password">
+                        </div>
+                        <div class="group">
+                          <label for="user" class="label">Description</label>
+                          <input id="user" type="text" class="input">
+                        </div>
+                        <div class="group">
+                          <label for="user" class="label">topic</label>
+                          <input id="topic" type="text" class="input" placeholder="education, job or fun">
+                        </div>
+
+                        <div class="group">
+                          <button type="submit" class="button">Save</button>
+                        </div>
+
+                      </div>
+                      <div class="sign-up-htm">
+                        <div class="group">
+                          <label for="user" class="label">URL</label>
+                          <input id="user" type="text" class="input">
+                        </div>
+                        <div class="group">
+                          <label for="pass" class="label">title</label>
+                          <input id="pass" type="password" class="input">
+                        </div>
+
+                        <div class="group">
+                          <button type="submit" class="button">Search</button>
+                        </div>
+
+                      </div>
+                      <div class="group">
+                        <label for="user" class="label">topic</label>
+                        <select name="topic" class="input">
+                          <option value="">Select a topic</option>
+                          <option value="computers">Art</option>
+                          <option value="computers">Computers</option>
+                          <option value="computers">Animals</option>
+                          <option value="computers">Food And Drink</option>
+                          <option value="computers">Home Decor</option>
+                          <option value="computers">Video Games</option>
+                          <option value="computers">Fashion</option>
+                          <option value="computers">Travel</option>
+                        </select>
+                        <input type="text" name="newTopic" class="input">
+                      </div>
+
+                      <div class="group">
+                        <button type="submit" class="button">Save</button>
+                      </div>
+
+
+                    </div>
+            </form>
+            <form method="POST" action="/api/users/search">
+              <div class="search-htm">
+                <div class="group">
+                  <label for="user" class="label">title</label>
+                  <input id="title1" type="user" class="input">
+                </div>
+                <div class="group">
+                  <button type="submit" class="button">Search</button>
+                </div>
+
+              </div>
+            </form>
+          </div>
         </div>
-
-          <div class="group">
-            <button type="submit" class="button">Save</button>
-          </div>
-
-        </div>
-        <div class="search-htm">
-          <div class="group">
-            <label for="user" class="label">URL</label>
-            <input id="url1" type="text" class="input">
-          </div>
-          <div class="group">
-            <label for="user" class="label">title</label>
-            <input id="title1" type="user" class="input">
-          </div>
-
-          <div class="group">
-            <button type="submit" class="button">Search</button>
-          </div>
-
-=======
-    <div class="login-wrap">
-      <div class="login-html">
-        <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Save New
-          Post</label>
-        <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Search</label>
-        <div class="login-form">
-          <div class="sign-in-htm">
-            <div class="group">
-              <label for="user" class="label">URL</label>
-              <input id="user" type="text" class="input">
-            </div>
-            <div class="group">
-              <label for="pass" class="label">Title</label>
-              <input id="pass" type="text" class="input" data-type="password">
-            </div>
-            <div class="group">
-              <label for="user" class="label">Description</label>
-              <input id="user" type="text" class="input">
-            </div>
-            <div class="group">
-              <label for="user" class="label">topic</label>
-              <input id="topic" type="text" class="input" placeholder="education, job or fun">
-            </div>
-
-            <div class="group">
-              <button type="submit" class="button">Save</button>
-            </div>
-
-          </div>
-          <div class="sign-up-htm">
-            <div class="group">
-              <label for="user" class="label">URL</label>
-              <input id="user" type="text" class="input">
-            </div>
-            <div class="group">
-              <label for="pass" class="label">title</label>
-              <input id="pass" type="password" class="input">
-            </div>
-
-            <div class="group">
-              <button type="submit" class="button">Search</button>
-            </div>
-
-          </div>
->>>>>>> sql_queries
-        </div>
-      </form>
+      </div>
     </div>
-  </div>
 
-  <div class="container-fluid">
-    <ul>
-      <li>
-        <a href="#">
+    <div class="container-fluid">
+      <ul>
+        <% for (const post of posts) { %>
 
-          <p>URL: Title: Description:</p>
-        </a>
-      </li>
-      <li>
-        <a href="#">
+          <li>
+            <a>
+              <i class="pin"></i>
+              <p>URL: <%= post.content_link_url %>
+              </p>
+              <p>Title: <%= post.title %>
+              </p>
+              <p>Description: <%= post.description %>
+              </p>
+              <p>Topic: <%= post.topic %>
+              </p>
+              <div class="icon">
+                <span>
+                  <%= post.date_posted %>
+                </span>
+                <i class="fa-solid fa-heart"></i>
+                <i class="fa-solid fa-ranking-star"></i>
+                <i class="fa-solid fa-comment"></i>
+              </div>
+            </a>
+          </li>
+          <% } %>
 
-          <p>URL: Title: Description:</p>
-        </a>
-      </li>
-      <li>
-        <a href="#">
+      </ul>
 
-          <p>URL: Title: Description:</p>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-
-          <p>URL: Title: Description:</p>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-
-          <p>URL: Title: Description:</p>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-
-          <p>URL: Title: Description:</p>
-        </a>
-      </li>
-
-    </ul>
-
-
-
-</div>
+    </div>
 
 </body>
 

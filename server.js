@@ -34,18 +34,28 @@ app.use(express.static('public'));
 // Note: Feel free to replace the example routes below with your own
 const postRoutes = require('./routes/postRoutes');
 const userRoutes = require('./routes/userRoutes');
-
+const resourceRoutes = require('./routes/resourceRoutes');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/api/users', postRoutes);
 app.use('/users', userRoutes); //all routes for users begin with /users
+app.use('/resources', resourceRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
+
+app.get('/', (req, res) => {
+  userQueries.getAllPosts()
+  .then(posts => {
+    console.log(posts)
+    const templateVars = {posts, user: 0}
+    res.render('index', templateVars);
+  })
+});
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

@@ -137,8 +137,8 @@ ul li a{
   color:#000;
   background:#ffc;
   display:block;
-  height:22em;
-  width:22em;
+  height:26em;
+  width:26em;
   padding:1em;
   box-shadow: 5px 5px 7px rgba(33,33,33,.7);
 	transform: rotate(-6deg);
@@ -156,7 +156,7 @@ p {
   font-family: 'Reenie Beanie';
   font-size: 2rem;
 	font-weight: normal;
-	margin-bottom: 2em;
+	margin-bottom: 1.2em;
 }
 
 ul li:nth-child(even) a{
@@ -242,12 +242,13 @@ ul li a:hover,ul li a:focus{
 	display: flex;
 	justify-content: flex-end;
 	color: rgb(199, 9, 9);
-	// margin: 5px;
+	
 }
 
 .fa-solid {
-	margin: 5px;
+	margin: 0.2em;
 	font-size: larger;
+  // margin-bottom: 2em;
 }
 
 .fa-solid:hover {

@@ -35,6 +35,7 @@ const addPost = function (post) {
       [user_id, topic_id, title, content_link_url, description]
     )
     .then((result) => {
+      console.log(result.rows)
       return result.rows;
     })
 
@@ -114,16 +115,21 @@ const updateUser = function (userId, options) {
 const getAllPosts = function () {
   return db
     .query(
-      `
-    SELECT posts.id, title, content_link_url, description, date_posted, comments
-  FROM posts
-  RIGHT JOIN post_likes ON posts.id = post_id
-  LEFT RIGHT JOIN post_likes ON posts.id = post_id
-  LEFT JOIN post_comments ON posts.id = post_comments.post_id posts.id = post_comments.post_id
-  ORDER BY date_posted;`,
+      `SELECT
+      posts.*, COUNT(post_likes.*) AS likes, JSON_AGG(post_comments) AS comments
+    FROM
+      posts
+    LEFT JOIN
+      post_likes ON posts.id = post_likes.post_id
+    LEFT JOIN
+      post_comments ON posts.id = post_comments.post_id
+    GROUP BY
+      posts.id;
+      `,
       []
     )
     .then((result) => {
+      console.log(result.rows[0])
       return result.rows;
     })
 
@@ -218,9 +224,83 @@ const getUserWithId = function (id) {
     });
 };
 
+// Get all user posts
+
+const getUserPosts = function() {
+  return db
+    .query(
+      `SELECT
+      posts.*, COUNT(post_likes.*) AS likes
+    FROM
+      posts
+    LEFT JOIN
+      post_likes ON posts.id = post_likes.post_id
+    WHERE
+      posts.user_id = 1
+    GROUP BY
+      posts.id;
+      `
+    )
+    .then((result) => {
+      console.log(result.rows)
+      return result.rows;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 //UPDATE
 
-// get all posts that have the same topic
+
+
+
+
+// get all posts that have the same title
+
+const getResource = function (title) {
+
+  return db
+    .query(`
+    SELECT content_link_url, title, description, name, date_posted
+    FROM posts
+    JOIN topics ON topics.id = topic_id
+    WHERE title = $1
+    `, [title]
+    )
+    .then((res) => {
+      console.log(res.rows[0]);
+      return res.rows[0];
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+
+const getPostById = function(postId) {
+  return db
+    .query(
+      `SELECT
+      posts.*, COUNT(post_likes.*) AS likes
+    FROM
+      posts
+    LEFT JOIN
+      post_likes ON posts.id = post_likes.post_id
+    WHERE
+      posts.id = $1
+    GROUP BY
+      posts.id;
+      `, [postId]
+    )
+    .then((result) => {
+      console.log(result.rows[0])
+      return result.rows[0];
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
 
 
 // Update user info based on input into the profile page
@@ -238,5 +318,9 @@ module.exports = {
   getUserWithEmail,
   getUserWithId,
   getUser,
-  updateUser
+  updateUser,
+  getUserPosts,
+  getAllPosts,
+  getPostById,
+  getResource
 };

@@ -22,10 +22,10 @@
 
 <body>
 
-    <p class="main-title">My Resources</p>
+    <p class="main-title"><%= post.title %></p>
 
   <ul>
-    <% for (const post of posts) { %>
+  
           
 
         
@@ -33,19 +33,17 @@
           
         <a>
           <i class="pin"></i>
-          <p>URL: <%= post.content_link_url %></p>
+          <p>URL:</p>
           <p>Title: <%= post.title %></p>
-          <p>Description: <%= post.description %></p>
-          <p>Topic: <%= post.topic %></p>
+          <p>Description:</p>
           <div class="icon">
-            <span> <%= post.date_posted %></span>
             <i class="fa-solid fa-heart"></i>
             <i class="fa-solid fa-ranking-star"></i>
             <i class="fa-solid fa-comment"></i>
           </div>
         </a>
       </li>
-  <% } %>
+
     
   </ul>
 
