@@ -1,136 +1,38 @@
 body{
-	margin:0;
-	color:#797f9e;
-	background: #eabc86;
-	background-image: url(https://www.transparenttextures.com/patterns/asfalt-dark.png);
-	font:600 16px/18px 'Open Sans',sans-serif;
-}
-*,:after,:before{box-sizing:border-box}
-.clearfix:after,.clearfix:before{content:'';display:table}
-.clearfix:after{clear:both;display:block}
-a{color:inherit;text-decoration:none}
-
-.main-wrap{
-	width:100%;
-	margin:auto;
-	min-height:670px;
-	position:relative;
-  background-color:rgba(59, 88, 161, 0.9);
-	background-image: url(https://www.transparenttextures.com/patterns/asfalt-dark.png);
-	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
-}
-.save-search{
-	width:100%;
-	height:100%;
-	position:absolute; 
-	padding:90px 70px 50px 70px;
-}
-
-.save-search .save-post-htm,
-.save-search .search-htm{
-	top:0;
-	left:0;
-	right:0;
-	bottom:0;
-	position:absolute;
-	transform:rotateY(180deg);
-	backface-visibility:hidden;
-	transition:all .4s linear;
-}
-
-
-.save-search .save-post,
-.save-search .search{
-	display:none;
-}
-.save-search .tab,
-.form .group .label,
-.form .group .button{
-	text-transform:uppercase;
-}
-.save-search .tab{
-	font-size:22px;
-	margin-right:15px;
-	padding-bottom:5px;
-	margin:0 -300px 30px 350px;
-	display:inline-block;
-	border-bottom:2px solid transparent;
-}
-.save-search .save-post:checked + .tab,
-.save-search .search:checked + .tab{
-	color:#fff;
-	border-color:#1161ee;
-	
-}
-.form{
-  margin-left: 20%;
-	min-height:345px;
-  width: 60%;
-	position:relative;
-	perspective:1000px;
-	transform-style:preserve-3d;
-}
-.form .group{
-	margin-bottom:15px;
-}
-.form .group .label,
-.form .group .input,
-.form .group .button{
-	width:100%;
-	color:#fff;
-	display:block;
-}
-.form .group .input,
-.form .group .button{
-	border:none;
-	padding:15px 20px;
-	border-radius:25px;
-	background:rgba(255,255,255,.1);
-}
-
-.form .group .label{
-	color:#aaa;
-	font-size:12px;
-}
-.form .group .button{
-  background:#1161ee;
-}
-
-.save-search .save-post:checked + .tab + .search + .tab + .form .save-post-htm{
-	transform:rotate(0);
-}
-.save-search .search:checked + .tab + .form .search-htm{
-	transform:rotate(0);
-}
-
-.button{
-  margin-top: 30px;
-}
-
-.form .group .input{
-	color: #aaa;
-}
-
-
-
-.container-fluid{
   background-image:url(https://www.transparenttextures.com/patterns/asfalt-dark.png);
-  background-color: #eabc86;
+  // background-color: #eabc86;
   margin: 20px auto;
   font-family: 'Lato';
+  display: flex;
+  flex-direction: column;
+  gap: -20em;
+  background-color:rgba(59, 88, 161, 0.9);
 }
 *{
   margin:0;
   padding:0;
 }
 
+.main-title{
+  padding: 1em;
+  font-size: 10em;
+  margin-bottom: 0.2em;
+  
+}
+
+
 ul,li{
   list-style:none;
+  background-color: #eabc86;
+  background-image:url(https://www.transparenttextures.com/patterns/asfalt-dark.png);
 }
 ul{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  border: 1.5em solid rgb(172, 111, 20);
+  border-style: ridge;
+  
 }
 ul li a{
   text-decoration:none;
@@ -145,8 +47,9 @@ ul li a{
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
-	padding: 1em;
-	margin-top: 2em;
+	padding: 1.5em;
+	// margin-top: 2em;
+  margin-bottom: 3em;
 }
 ul li{
   margin:1em;
