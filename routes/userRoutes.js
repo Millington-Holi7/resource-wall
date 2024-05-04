@@ -17,6 +17,22 @@ router.get('/login', (req, res) => { ///users/login
   res.render('login', templateVars);
 });
 
+router.post("/login", (req, res) => {
+  const { email, password } = req.body;
+
+  userQueries.getUserWithEmail(email)
+    .then((user) => {
+      console.log(user)
+      req.session.user_id = user.id;
+      res.redirect("/")
+    })
+    .catch(err => {
+      console.log(err)
+      res.redirect("/users/login")
+    })
+
+})
+
 //REGISTER ROUTES
 router.get('/register', (req, res) => {
   if (req.session.user_id) {
