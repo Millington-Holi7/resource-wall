@@ -281,6 +281,7 @@ const getResource = function (title) {
 
   return db
     .query(`
+    
     SELECT content_link_url, title, description, name, date_posted
     FROM posts
     JOIN topics ON topics.id = topic_id
@@ -288,8 +289,8 @@ const getResource = function (title) {
     `, [title]
     )
     .then((res) => {
-      console.log(res.rows[0]);
-      return res.rows[0];
+      console.log(res.rows);
+      return res.rows;
     })
     .catch((error) => {
       console.error(error);

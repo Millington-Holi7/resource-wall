@@ -22,7 +22,7 @@ router.post("/resources/:resourceId/like", (req, res) => {
 
 router.post("/resources/:resourceId/comment", (req, res) => {
   const { resourceId } = req.params;
- const { userId } = req.session;
+  const { userId } = req.session;
 })
 
 //Search is working
@@ -32,22 +32,3 @@ router.post("/resources/:resourceId/comment", (req, res) => {
 module.exports = router;
 
 
-// IN THE PAGE
-
-//<button>LIKE / UNLIKE </button>
-
-
-
-//
-
-// <form action="/resources/:resourceId/like" method="POST">
-//   <button>LIKE</button>
-// </form>
-
-
-
-// const saveButton = document.getElementById('saveButton');
-// saveButton.addEventListener('click', function(){
-
-
-// })

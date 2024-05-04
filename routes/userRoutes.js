@@ -7,28 +7,34 @@
 
 const express = require('express');
 const router = express.Router();
-const cookieSession = require("cookie-session");
 const bcrypt = require("bcryptjs");
 const userQueries = require('../db/queries/users');
 
 
-//MIDDLEWEAR
-router.use(
-  cookieSession({
-    //
-    name: "cookiez", //name could be anything but make sure context is there
-    keys: ["key1", "key2"],
 
-  })
-);
 
 //LOGIN ROUTES
 router.get('/login', (req, res) => { ///users/login
-  //const user = {};
   const templateVars = { user: null };
   //const templateVars = { user: user, error: undefined };
   res.render('login', templateVars);
 });
+
+router.post("/login", (req, res) => {
+  const { email, password } = req.body;
+
+  userQueries.getUserWithEmail(email)
+    .then((user) => {
+      console.log(user)
+      req.session.user_id = user.id;
+      res.redirect("/")
+    })
+    .catch(err => {
+      console.log(err)
+      res.redirect("/users/login")
+    })
+
+})
 
 //REGISTER ROUTES
 router.get('/register', (req, res) => {

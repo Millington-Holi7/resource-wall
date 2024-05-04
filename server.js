@@ -34,9 +34,9 @@ app.use(express.static('public'));
 app.use(
   cookieSession({
     //
-    name: "session", //name could be anything but make sure context is there
-    keys: ["key1", "key2"],
-
+    name: 'session',
+    keys: ['key1', 'key2'], // You can use any string(s) as key(s)
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
   })
 );
 // Separated Routes for each Resource
@@ -59,12 +59,15 @@ app.use('/api', apiRoutes)
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
- 
+  console.log('###', req.session)
   userQueries.getAllPosts()
     .then(posts => {
 
       const templateVars = { posts, user: req.session.user_id }
       res.render('index', templateVars);
+    })
+    .catch((error) => {
+      console.log(error)
     })
 });
 

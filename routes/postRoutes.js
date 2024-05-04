@@ -8,18 +8,8 @@
 const express = require('express');
 const router = express.Router();
 const userQueries = require('../db/queries/users');
-//const cookieSession = require("cookie-session");
 
-// router.use(
-//   cookieSession({
-//     //
-//     name: "session", //name could be anything but make sure context is there
-//     keys: ["key1", "key2"],
 
-//   })
-// );
-
-//USERS CRUD REST API
 
 //CREATE - POST /
 router.post("/register", (req, res) => {
@@ -56,44 +46,10 @@ router.post("/register", (req, res) => {
 // });
 
 // //READ ONE - GET /:id
-router.post("/login", (req, res) => {
-  const { username, email, password } = req.body;
 
-  userQueries.getUserWithEmail(email)
-    .then((user) => {
-      console.log(user)
-      req.session.user_id = user.id;
-      res.redirect("/")
-    })
-    .catch(err => {
-      console.log(err)
-      res.redirect("/users/login")
-    })
-
-})
-// router.get('/:id', (req, res) => {
-//
-// })
-
-// //UPDATE - POST /:id
-// router.post('/:id', (req, res) => {
-
-//
-// })
-
-// //DELETE - POST /:id/delete
-// router.post('/:id/delete', (req, res) => {
-//
-// })
 
 // CREATE POST
-// router.post('/create-post', (req, res) => {
 
-//   console.log('***', req.session.user_id)
-//   let {topic_id, title, content_link_url, description } = req.body
-//   userQueries.addPost(user_id = req.session.user_id, topic_id, title, content_link_url, description)
-//   res.redirect('/resources');
-// })
 router.post('/create-post', (req, res) => {
   // Construct the post object correctly
   const post = {
@@ -103,7 +59,6 @@ router.post('/create-post', (req, res) => {
   userQueries.addPost(post)
     .then(() => res.redirect('/resources'))
     .catch(error => {
-      // Proper error handling here
       console.error(error);
       res.status(500).send('Server error');
     });
@@ -111,7 +66,7 @@ router.post('/create-post', (req, res) => {
 
 // SEARCH
 router.post('/search', (req, res) => {
-  console.log(req.body);
+  console.log('***', req);
   userQueries.getResource(req.body)
   res.redirect('/');
 })
