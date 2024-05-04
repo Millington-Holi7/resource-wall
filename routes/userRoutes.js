@@ -17,29 +17,17 @@ router.get('/login', (req, res) => { ///users/login
   res.render('login', templateVars);
 });
 
-router.post("/login", (req, res) => {
-  const { email, password } = req.body;
-
-  userQueries.getUserWithEmail(email)
-    .then((user) => {
-      console.log(user)
-      req.session.user_id = user.id;
-      res.redirect("/")
-    })
-    .catch(err => {
-      console.log(err)
-      res.redirect("/users/login")
-    })
-
-})
-
 //REGISTER ROUTES
 router.get('/register', (req, res) => {
   if (req.session.user_id) {
-  res.redirect('login')
-  } else {
-    res.render('register', templateVars);
+    // If user is already logged in, redirect to /urls or another relevant page
+    const currentUser = userQueries.getUser(req.session.user_id);
+    if (currentUser) {
+      return res.redirect("/login");
+    }
   }
+  const templateVars = { user: null };
+  res.render("register", templateVars);
 });
 
 

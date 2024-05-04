@@ -8,6 +8,7 @@
 const express = require('express');
 const router = express.Router();
 const userQueries = require('../db/queries/users');
+const bcrypt = require("bcryptjs");
 
 //USERS CRUD REST API
 
