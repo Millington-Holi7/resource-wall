@@ -1,17 +1,21 @@
-router.post("/:resourceId/like", (req, res) => {
+const express = require('express');
+const router = express.Router();
+const userQueries = require('../db/queries/users');
+
+router.post("/resources/:resourceId/like", (req, res) => {
   const { resourceId } = req.params;
   const { alreadyLiked } = req.body;
   const { userId } = req.session;
-
-  if (alreadyLiked) {
+  console.log(req.body);
+  if (JSON.parse(alreadyLiked)) {
     userQueries.removeLike(userId, resourceId).then((dbRes) => {
-      res.json({ status: "OK" }); //IF AJAX
-      res.redirect("/resource/...") //IF FORM
+      res.json({ liked: false }); //IF AJAX
+
     });
   } else {
     userQueries.addLike(userId, resourceId).then((dbRes) => {
-      res.json({ status: "OK" });
-      res.redirect("/resource/...")
+      res.json({ liked: true });
+
     });
   }
 });
@@ -43,15 +47,9 @@ module.exports = router;
 
 // IN THE PAGE
 
-<button>LIKE / UNLIKE </button>
+//<button>LIKE / UNLIKE </button>
 
-$("button.like").click(() => {
-  $.ajax({
-    url:"/resources/:resourceId/like",
-    method:"POST",
-    data:{alreadyLiked:true}
-  })
-})
+
 
 //
 
@@ -63,5 +61,6 @@ $("button.like").click(() => {
 
 // const saveButton = document.getElementById('saveButton');
 // saveButton.addEventListener('click', function(){
+
 
 // })

@@ -44,29 +44,47 @@ const addPost = function (post) {
     });
 };
 
-const addTopic = function (options){
+const addTopic = function (options) {
   return db.query(
     `INSERT INTO post_topics(name)`
   )
 };
 
-const addLikePost = function (options){
-  const { user_id, post_id} = options;
+const addLike = function (userId, postId) {
   return db
-  .query(
-    `INSERT INTO posts_likes (user_id, post_id)
+    .query(
+      `INSERT INTO post_likes (user_id, post_id)
  VALUES ($1, $2)
  RETURNING *;`,
-    [user_id, post_id]
-  )
-  .then((result) => {
-    console.log(result.rows[0]);
-    return result.rows[0];
-  })
+      [userId, postId]
+    )
+    .then((result) => {
+      console.log(result.rows[0]);
+      return result.rows[0];
+    })
 
-  .catch((error) => {
-    console.error(error);
-  });
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+const removeLike = function (userId, postId) {
+  return db
+    .query(
+      `DELETE FROM post_likes
+    WHERE user_id = $1
+    AND post_id = $2
+ RETURNING *;`,
+      [userId, postId]
+    )
+    .then((result) => {
+      console.log(result.rows[0]);
+      return result.rows[0];
+    })
+
+    .catch((error) => {
+      console.error(error);
+    });
 }
 const addComment = function (comment) { };
 
@@ -151,35 +169,35 @@ const getAllLikePosts = function (userId) {
     JOIN post_likes ON post_id = posts.id
     JOIN post_comments ON
     WHERE id = $1 `,
-    {userId}
+    { userId }
   )
-  .then((result) => {
-    return result.rows;
-  })
+    .then((result) => {
+      return result.rows;
+    })
 
-  .catch((error) => {
-    console.error(error);
-  });
+    .catch((error) => {
+      console.error(error);
+    });
 };
 
 //READ ONE
 /// Users
 // Get a single user from the database given their username
-const getUserWithUsername = function(username) {
+const getUserWithUsername = function (username) {
   return db.query(
     `SELECT * FROM users WHERE username = $1`,
     [username]
   )
-  .then((result) => {
-    if (result.rows.length) {
-      return result.rows[0];
-    } else {
-      return null;
-    }
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+    .then((result) => {
+      if (result.rows.length) {
+        return result.rows[0];
+      } else {
+        return null;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
 /// Get a single user from the database given their email.
@@ -226,20 +244,22 @@ const getUserWithId = function (id) {
 
 // Get all user posts
 
-const getUserPosts = function() {
+const getUserPosts = function (userId) {
   return db
     .query(
       `SELECT
-      posts.*, COUNT(post_likes.*) AS likes
+      posts.*, COUNT(post_likes.*) AS likes, JSON_AGG(post_comments) AS comments
     FROM
       posts
     LEFT JOIN
       post_likes ON posts.id = post_likes.post_id
-    WHERE
-      posts.user_id = 1
+    LEFT JOIN
+      post_comments ON posts.id = post_comments.post_id
+      WHERE posts.user_id = $1
     GROUP BY
       posts.id;
-      `
+      `,
+      [userId]
     )
     .then((result) => {
       console.log(result.rows)
@@ -278,8 +298,8 @@ const getResource = function (title) {
 };
 
 
-const getPostById = function(postId) {
-  return db
+const getPostById = function (postId, userId) {
+  const queryOne = db
     .query(
       `SELECT
       posts.*, COUNT(post_likes.*) AS likes
@@ -293,9 +313,20 @@ const getPostById = function(postId) {
       posts.id;
       `, [postId]
     )
+
+  const queryTwo = db.query(
+    `SELECT *
+      FROM post_likes
+      WHERE post_id = $1
+      AND user_id = $2`,
+    [postId, userId]
+  )
+  return Promise.all([queryOne, queryTwo])
     .then((result) => {
-      console.log(result.rows[0])
-      return result.rows[0];
+      const output = result[0].rows[0]
+      output.liked = result[1].rows.length > 0
+      console.log(output)
+      return output;
     })
     .catch((error) => {
       console.error(error);
@@ -310,7 +341,8 @@ const getPostById = function(postId) {
 module.exports = {
   addUser,
   addPost,
-  //addLike,
+  addLike,
+  removeLike,
   addComment,
   addRaiting,
   getAllLikePosts,

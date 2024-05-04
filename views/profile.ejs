@@ -24,30 +24,30 @@
 
 <body>
   <%- include('partials/_header') %>
-  <form action="/users/profile" method="POST">
-    <div>
-      <h1>Update user profile</h1>
-      <div class="profile-pic">
-        <img src="https://i.imgur.com/73hZDYK.png" id="output" width="200" />
-        <div class="upload_image">
-          <label class="-label" for="file">
-            <span class="glyphicon glyphicon-camera"></span>
-            <h3>Change Image</h3>
-          </label>
-          <input class="ml-auto" type="url" name="profile_pic" placeholder="upload a url" />
+    <form action="/users/profile" method="POST">
+      <div>
+        <h1>Update user profile</h1>
+        <div class="upper-section">
+          <img src="<%= profile_pic %>" id="output" width="200" />
+          <div class="upload_image">
+            <label class="-label" for="file">
+              <span class="glyphicon glyphicon-camera"></span>
+              <h3>Change Image</h3>
+            </label>
+            <input class="ml-auto" type="url" name="profile_pic" placeholder="upload a url" />
+          </div>
+        </div>
+        <h3>Username</h3>
+        <input class="ml-auto" type="name" name="username" placeholder="<%= username %>" />
+        <h3>Email address</h3>
+        <input class="ml-auto" type="email" name="email" placeholder="<%= email %>" />
+        <h3>Password</h3>
+        <input class="ml-auto" type="password" name="password" placeholder="Enter Password" />
+        <div class="Save_info">
+          <button id="saveButton" class="btn" type="submit">Save</button>
         </div>
       </div>
-      <h3>Username</h3>
-      <input class="ml-auto" type="name" name="username" placeholder="<%= username %>" />
-      <h3>Email address</h3>
-      <input class="ml-auto" type="email" name="email" placeholder="<%= email %>" />
-      <h3>Password</h3>
-      <input class="ml-auto" type="password" name="password" placeholder="Enter Password" />
-      <div class="Save_info">
-        <button id="saveButton" class="btn" type="submit">Save</button>
-      </div>
-    </div>
-  </form>
+    </form>
 </body>
 
 </html>

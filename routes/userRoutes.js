@@ -61,7 +61,7 @@ router.get('/profile', (req, res) => {
 
 router.post('/profile', (req, res) => {
   const { username, email, password, profile_pic } = req.body;
-  const currentUser = req.session;
+  const currentUser = 1;
 
   const hash = bcryptPassword(password)
   const options = { username, email, password: hash, profile_pic }
