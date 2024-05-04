@@ -7,24 +7,11 @@
 
 const express = require('express');
 const router = express.Router();
-const cookieSession = require("cookie-session");
 const bcrypt = require("bcryptjs");
 const userQueries = require('../db/queries/users');
 
-
-//MIDDLEWEAR
-router.use(
-  cookieSession({
-    //
-    name: "cookiez", //name could be anything but make sure context is there
-    keys: ["key1", "key2"],
-
-  })
-);
-
 //LOGIN ROUTES
 router.get('/login', (req, res) => { ///users/login
-  //const user = {};
   const templateVars = { user: null };
   //const templateVars = { user: user, error: undefined };
   res.render('login', templateVars);
@@ -32,10 +19,11 @@ router.get('/login', (req, res) => { ///users/login
 
 //REGISTER ROUTES
 router.get('/register', (req, res) => {
-  const user = {};
-  const profile_pic = ""; // Change this to the actual path
-  const templateVars = { user: user, profile_pic: profile_pic, error: undefined }; // Remove the colon after profile_pic
-  res.render('register', templateVars);
+  if (req.session.user_id) {
+  res.redirect('login')
+  } else {
+    res.render('register', templateVars);
+  }
 });
 
 

@@ -1,7 +1,6 @@
 body{
   background-image:url(https://www.transparenttextures.com/patterns/asfalt-dark.png);
   // background-color: #eabc86;
-  margin: 20px auto;
   font-family: 'Lato';
   display: flex;
   flex-direction: column;
@@ -17,7 +16,7 @@ body{
   padding: 1em;
   font-size: 10em;
   margin-bottom: 0.2em;
-  
+
 }
 
 
@@ -32,7 +31,7 @@ ul{
   justify-content: center;
   border: 1.5em solid rgb(172, 111, 20);
   border-style: ridge;
-  
+
 }
 ul li a{
   text-decoration:none;
@@ -118,20 +117,20 @@ ul li a:hover,ul li a:focus{
 .pin:before {
   background-color: hsla(0,0%,0%,0.1);
   box-shadow: 0 0 .25em hsla(0,0%,0%,.1);
-  content: ''; 
+  content: '';
 
   height: 24px;
   width: 2px;
   left: 0;
   position: absolute;
   top: 8px;
- 
+
   transform: rotate(57.5deg);
   -moz-transform: rotate(57.5deg);
   -webkit-transform: rotate(57.5deg);
   -o-transform: rotate(57.5deg);
   -ms-transform: rotate(57.5deg);
- 
+
   transform-origin: 50% 100%;
   -moz-transform-origin: 50% 100%;
   -webkit-transform-origin: 50% 100%;
@@ -150,7 +149,7 @@ ul li a:hover,ul li a:focus{
 .fa-solid {
 	margin: 5px;
 	font-size: larger;
-  
+
 }
 
 .fa-solid:hover {

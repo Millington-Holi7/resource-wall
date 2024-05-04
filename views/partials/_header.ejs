@@ -1,6 +1,6 @@
 <header>
   <nav>
-    <a class="nav-items" href="/users/index">
+    <a class="nav-items" href="/">
       <h1>Resource ✹ Wall</h1>
     </a>
     <div class="nav-links">
@@ -11,12 +11,12 @@
           <p>Logged in as <span>
               <%=user.username%>
             </span>
-            <img src="<%= user.profile_pic %>" />
+            <img id="user-picture" src="<%= user.profile_pic %>" />
           </p>
           <a class="nav-items" href="/resources">My Resources</a>
           <a class="nav-items" href="/users/profile">Profile</a>
-          <form class="form" action="/logout" method="POST">
-            <button type="submit" class="btn btn-outline-dark">logout</button>
+          <form class="logout-form" action="/logout" method="POST">
+            <button type="submit" class="logout-btn">logout</button>
           </form>
           <% } %>
     </div>
