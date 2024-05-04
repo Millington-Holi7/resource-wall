@@ -13,9 +13,24 @@ const userQueries = require('../db/queries/users');
 //LOGIN ROUTES
 router.get('/login', (req, res) => { ///users/login
   const templateVars = { user: null };
-  //const templateVars = { user: user, error: undefined };
   res.render('login', templateVars);
 });
+
+router.post("/login", (req, res) => {
+  const { email, password } = req.body;
+
+  userQueries.getUserWithEmail(email)
+    .then((user) => {
+      console.log(user)
+      req.session.user_id = user.id;
+      res.redirect("/")
+    })
+    .catch(err => {
+      console.log(err)
+      res.redirect("/users/login")
+    })
+
+})
 
 //REGISTER ROUTES
 router.get('/register', (req, res) => {
@@ -30,6 +45,23 @@ router.get('/register', (req, res) => {
   res.render("register", templateVars);
 });
 
+router.post("/register", (req, res) => {
+  const { username, email, password, profile_pic } = req.body;
+  const hashedPassword = bcrypt.hashSync(password, 10); // Hash the password
+  const newUser = { username, email, password: hashedPassword, profile_pic }; //DONT FORGET TO IMPLEMENT URL
+  userQueries.getUserWithEmail(email).then(user => {
+    if (user && user.id) {
+      return res.status(400).send({ message: 'email already registered' });
+    }
+    userQueries.addUser(newUser).then(user => {
+      if (user && user.id) {
+        console.log(req.body);
+        req.session.user_id = user.id;
+        res.redirect("/");
+      }
+    });
+  });
+});
 
 
 //PROFILE ROUTES

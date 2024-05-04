@@ -13,23 +13,6 @@ const bcrypt = require("bcryptjs");
 //USERS CRUD REST API
 
 //CREATE - POST /
-router.post("/register", (req, res) => {
-  const { username, email, password, profile_pic } = req.body;
-  const hashedPassword = bcrypt.hashSync(password, 10); // Hash the password
-  const newUser = { username, email, password: hashedPassword, profile_pic }; //DONT FORGET TO IMPLEMENT URL
-  userQueries.getUserWithEmail(email).then(user => {
-    if (user && user.id) {
-      return res.status(400).send({ message: 'email already registered' });
-    }
-    userQueries.addUser(newUser).then(user => {
-      if (user && user.id) {
-        console.log(req.body);
-        req.session.user_id = user.id;
-        res.redirect("/");
-      }
-    });
-  });
-});
 
 
 //READ ALL - GET /
