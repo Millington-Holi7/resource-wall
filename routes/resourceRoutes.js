@@ -23,5 +23,16 @@ router.get('/:resourceId', (req, res) => {
 
 });
 
+router.get('/search', (req, res) => {
+  userQueries.getResource(req.params)
+    .then(post => {
+      console.log(post)
+      const templateVars = { post }
+      res.render('search', templateVars);
+    })
+
+});
+
+
 module.exports = router;
 

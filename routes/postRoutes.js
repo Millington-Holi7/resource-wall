@@ -94,10 +94,12 @@ router.post('/create-post', (req, res) => {
 
 // SEARCH
 router.post('/search', (req, res) => {
-  console.log(req.body);
-  userQueries.getResource(req.body)
-  res.redirect('/');
+  console.log(req.body[0]);
+  userQueries.getResource(req.body);
+  res.redirect('/search');
 })
+
+
 
 
 
