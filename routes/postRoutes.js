@@ -42,25 +42,26 @@ router.post("/register", (req, res) => {
 
 
 //READ ALL - GET /
-router.get('/', (req, res) => {
-  userQueries.getUsers()
-    .then(users => {
-      res.json({ users });
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-});
+// router.get('/', (req, res) => {
+
+//   userQueries.getUsers()
+//     .then(users => {
+//       res.json({ users });
+//     })
+//     .catch(err => {
+//       res
+//         .status(500)
+//         .json({ error: err.message });
+//     });
+// });
 
 // //READ ONE - GET /:id
 router.post("/login", (req, res) => {
   const { username, email, password } = req.body;
 
   userQueries.getUserWithEmail(email)
-    .then(user => {
-
+    .then((user) => {
+      console.log(user)
       req.session.user_id = user.id;
       res.redirect("/")
     })
@@ -86,10 +87,27 @@ router.post("/login", (req, res) => {
 // })
 
 // CREATE POST
+// router.post('/create-post', (req, res) => {
+
+//   console.log('***', req.session.user_id)
+//   let {topic_id, title, content_link_url, description } = req.body
+//   userQueries.addPost(user_id = req.session.user_id, topic_id, title, content_link_url, description)
+//   res.redirect('/resources');
+// })
 router.post('/create-post', (req, res) => {
-  userQueries.addPost(req.body, req.session.userId)
-  res.redirect('/resources');
-})
+  // Construct the post object correctly
+  const post = {
+    user_id: req.session.user_id,
+    ...req.body // This assumes req.body includes topic_id, title, content_link_url, description
+  };
+  userQueries.addPost(post)
+    .then(() => res.redirect('/resources'))
+    .catch(error => {
+      // Proper error handling here
+      console.error(error);
+      res.status(500).send('Server error');
+    });
+});
 
 // SEARCH
 router.post('/search', (req, res) => {

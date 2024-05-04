@@ -43,17 +43,17 @@ router.get('/register', (req, res) => {
 //PROFILE ROUTES
 //path to update user profile
 router.get('/profile', (req, res) => {
-
-  const currentUser = 1;
-  // if (!currentUser) { // if they aren't logged in they can't update profile
-  //   return res.redirect("/login");
-  // }
+  console.log(req.session)
+  const currentUser = req.session.user_id;
+  if (!currentUser) { // if they aren't logged in they can't update profile
+    return res.redirect("/users/login");
+  }
   userQueries.getUser(currentUser) //send to function to get user info
     .then((user) => {
       if (!user) {
         return res.send({ error: "no user with that id" });
       }
-      console.log(user.profile_pic)
+
       const templateVars = { user: currentUser, username: user.username, email: user.email, password: user.password, profile_pic: user.profile_pic }
       res.render('profile', templateVars)
     })
@@ -61,21 +61,23 @@ router.get('/profile', (req, res) => {
 
 router.post('/profile', (req, res) => {
   const { username, email, password, profile_pic } = req.body;
-  const currentUser = 1;
+  console.log(req.session)
+  const currentUser = req.session.user_id;
+  let hash = bcryptPassword(password)
 
-  const hash = bcryptPassword(password)
   const options = { username, email, password: hash, profile_pic }
   console.log(`***`, options)
 
   userQueries.updateUser(currentUser, options)
     .then(() => {
       console.log('successful')
+
     })
     .catch(error => {
       console.log(error)
     })
+  res.redirect('/users/profile')
 
-  res.redirect('/')
 })
 
 router.post("/:resourceId", (req, res) => {
@@ -88,10 +90,7 @@ router.post("/:resourceId", (req, res) => {
     })
 })
 
-router.post("/logout", (req, res) => {
-  req.session = null;
-  return res.redirect(`/login`);
-});
+
 
 
 // enables storing passwords as hashed passwords instead of plaintext

@@ -37,10 +37,12 @@
 
         <a>
           <i class="pin"></i>
-          <p>URL:</p>
+          <p>URL: <%= post.content_link_url %>
+          </p>
           <p>Title: <%= post.title %>
           </p>
-          <p>Description:</p>
+          <p>Description:<%= post.description %>
+          </p>
           <div class="icon">
 
             <% if (post.liked){ %>
@@ -50,7 +52,7 @@
                 <% } %>
 
                   <i class="fa-solid fa-ranking-star"></i>
-                  <i class="fa-solid fa-comment"></i>
+                  <i id="comment-icon" class="fa-solid fa-comment"></i>
           </div>
         </a>
       </li>
@@ -66,20 +68,28 @@
 <script>
   let alreadyLiked = <%= post.liked %>
 
-  $("#like-icon").click(() => {
-    $.ajax({
-      url: "/api/resources/<%= post.id %>/like",
-      method: "POST",
-      data: { alreadyLiked }
-    })
-      .then((res) => {
-        console.log(res)
-        alreadyLiked = res.liked
-        $("#like-icon").toggleClass('fa-solid')
-        $("#like-icon").toggleClass('fa-regular')
+    $("#like-icon").click(() => {
+      $.ajax({
+        url: "/api/resources/<%= post.id %>/like",
+        method: "POST",
+        data: { alreadyLiked }
       })
+        .then((res) => {
+          console.log(res)
+          alreadyLiked = res.liked
+          $("#like-icon").toggleClass('fa-solid')
+          $("#like-icon").toggleClass('fa-regular')
+        })
 
+    })
+
+  $("#comment-icon").click(() => {
+    $.ajax({
+      url: "/api/resources/<%= post.id %>/comment",
+      method: "GET",
+    })
   })
+
 </script>
 
 </html>

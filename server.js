@@ -51,7 +51,7 @@ const apiRoutes = require('./routes/ApiRoutes');
 app.use('/api/users', postRoutes);
 app.use('/users', userRoutes); //all routes for users begin with /users
 app.use('/resources', resourceRoutes);
-app.use('/api', apiRoutes )
+app.use('/api', apiRoutes)
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -59,13 +59,18 @@ app.use('/api', apiRoutes )
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-
+ 
   userQueries.getAllPosts()
     .then(posts => {
-      console.log(posts)
-      const templateVars = { posts, user: req.session.userId }
+
+      const templateVars = { posts, user: req.session.user_id }
       res.render('index', templateVars);
     })
+});
+
+app.post("/logout", (req, res) => {
+  req.session = null;
+  return res.redirect(`/users/login`);
 });
 
 app.listen(PORT, () => {

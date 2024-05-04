@@ -20,23 +20,10 @@ router.post("/resources/:resourceId/like", (req, res) => {
   }
 });
 
-// router.post("/:resourceId/comment", (req, res) => {
-//   const { resourceId } = req.params;
-//   const { comment } = req.body;
-//   const { userId } = req.session;
-
-// //add comment
-// userQueries.addComment(userId, resourceId, comment)
-// .then ((comment))
-// // get all comments for a specific resourceId
-// userQueries.getComment()
-// .then((comment) => {
-// res.render('resource', comment)
-// })
-// .catch((error) => {
-//   console.error(error);
-// });
-// });
+router.post("/resources/:resourceId/comment", (req, res) => {
+  const { resourceId } = req.params;
+ const { userId } = req.session;
+})
 
 //Search is working
 //comment rate and like,

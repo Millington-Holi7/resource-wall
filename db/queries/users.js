@@ -29,7 +29,6 @@ const addPost = function (post) {
   return db
     .query(
       `INSERT INTO posts (user_id, topic_id, title, content_link_url, description)
-      OUTPUT inserted.topic_id
     VALUES ($1, $2, $3, $4, $5)
     RETURNING *;`,
       [user_id, topic_id, title, content_link_url, description]

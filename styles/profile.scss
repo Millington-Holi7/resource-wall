@@ -1,30 +1,35 @@
-body{
-	margin:0;
-	color:#797f9e;
-	background: #eabc86;
-	background-image: url(https://www.transparenttextures.com/patterns/asfalt-dark.png);
-	font:600 16px/18px 'Open Sans',sans-serif;
+body {
+  margin: 0;
+  color: #797f9e;
+  background: #eabc86;
+  background-image: url(https://www.transparenttextures.com/patterns/asfalt-dark.png);
+  font: 600 16px/18px 'Open Sans', sans-serif;
 }
-*,:after,:before{box-sizing:border-box}
-.clearfix:after,.clearfix:before{content:'';display:table}
-.clearfix:after{clear:both;display:block}
-a{color:inherit;text-decoration:none}
+
+*,
+:after,
+:before {
+  box-sizing: border-box
+}
+
+.clearfix:after,
+.clearfix:before {
+  content: '';
+  display: table
+}
+
+.clearfix:after {
+  clear: both;
+  display: block
+}
+
+a {
+  color: inherit;
+  text-decoration: none
+}
+
 
 form {
-	width:100%;
-	margin:auto;
-	min-height:670px;
-	position:relative;
-
-	background-image: url(https://www.transparenttextures.com/patterns/asfalt-dark.png);
-	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
-}
-.profile-pic {
-  display: flex;
-  width: 100%;
-}
-
-form{
   width: 100%;
   height: 100vh;
   display: flex;
@@ -33,7 +38,7 @@ form{
   filter: drop-shadow(-5px 5px 1rem #000000ca);
 }
 
-form div{
+form div {
   padding: 3%;
   width: 40%;
   background-color: #ffffff;
@@ -44,7 +49,7 @@ form div{
     margin-left: 10px;
   }
 
-  input{
+  input {
     width: 100%;
     height: 40px;
     border: solid 3px var(--border-color);
@@ -52,6 +57,7 @@ form div{
     padding: 0 20px;
   }
 }
+
 // @mixin object-center {
 //   display: flex;
 //   justify-content: center;
@@ -60,18 +66,18 @@ form div{
 
 $circleSize: 165px;
 $radius: 100px;
-$shadow: 0 0 10px 0 rgba(255,255,255,.35);
+$shadow: 0 0 10px 0 rgba(255, 255, 255, .35);
 
 
 img {
-    // position: absolute;
-    object-fit: cover;
-    width: $circleSize;
-    height: $circleSize;
-    box-shadow: $shadow;
-    border-radius: $radius;
-    z-index: 0;
-  }
+  // position: absolute;
+  object-fit: cover;
+  width: $circleSize;
+  height: $circleSize;
+  box-shadow: $shadow;
+  border-radius: $radius;
+  z-index: 0;
+}
 
 //   .upload_image{
 //     width: 423.20px;
@@ -81,8 +87,7 @@ img {
 //   }
 
 
-  // .profile-pic {
-  //   color: transparent;
-  //   @include object-center;
-  //   position: relative;
-
+// .profile-pic {
+//   color: transparent;
+//   @include object-center;
+//   position: relative;
