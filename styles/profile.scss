@@ -58,11 +58,7 @@ form div {
   }
 }
 
-// @mixin object-center {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// }
+
 
 $circleSize: 165px;
 $radius: 100px;
@@ -74,20 +70,7 @@ img {
   object-fit: cover;
   width: $circleSize;
   height: $circleSize;
-  box-shadow: $shadow;
   border-radius: $radius;
-  z-index: 0;
+
 }
 
-//   .upload_image{
-//     width: 423.20px;
-//     display: flex;
-//     flex-direction: column;
-//     margin-top: 15px;
-//   }
-
-
-// .profile-pic {
-//   color: transparent;
-//   @include object-center;
-//   position: relative;

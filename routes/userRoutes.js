@@ -49,14 +49,15 @@ router.post("/register", (req, res) => {
   const { username, email, password, profile_pic } = req.body;
   const hashedPassword = bcrypt.hashSync(password, 10); // Hash the password
   const newUser = { username, email, password: hashedPassword, profile_pic }; //DONT FORGET TO IMPLEMENT URL
+
   userQueries.getUserWithEmail(email).then(user => {
     if (user && user.id) {
       return res.status(400).send({ message: 'email already registered' });
     }
     userQueries.addUser(newUser).then(user => {
       if (user && user.id) {
-        console.log(req.body);
-        req.session.user_id = user.id;
+        console.log('333', user);
+        req.session = user;
         res.redirect("/");
       }
     });
@@ -68,19 +69,17 @@ router.post("/register", (req, res) => {
 //path to update user profile
 router.get('/profile', (req, res) => {
   console.log(req.session)
-  const currentUser = req.session.user_id;
-  if (!currentUser) { // if they aren't logged in they can't update profile
-    return res.redirect("/users/login");
-  }
-  userQueries.getUser(currentUser) //send to function to get user info
-    .then((user) => {
-      if (!user) {
-        return res.send({ error: "no user with that id" });
-      }
+  const currentUser = req.session;
 
-      const templateVars = { user: currentUser, username: user.username, email: user.email, password: user.password, profile_pic: user.profile_pic }
-      res.render('profile', templateVars)
-    })
+  // userQueries.getUser(currentUser) //send to function to get user info
+  //   .then((user) => {
+  //     if (!user) {
+  //       return res.send({ error: "no user with that id" });
+  //     }
+
+  const templateVars = { user: currentUser }
+  res.render('profile', templateVars)
+
 });
 
 router.post('/profile', (req, res) => {

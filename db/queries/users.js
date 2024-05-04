@@ -6,13 +6,13 @@ const db = require("../connection");
 
 ///Add a new user to the database.
 const addUser = function (user) {
-  const { username, email, password } = user;
+  const { username, email, password, profile_pic } = user;
   return db
     .query(
-      `INSERT INTO users (username, email, password)
-   VALUES ($1, $2, $3)
+      `INSERT INTO users (username, email, password, profile_pic)
+   VALUES ($1, $2, $3, $4)
    RETURNING *;`,
-      [username, email, password]
+      [username, email, password, profile_pic]
     )
     .then((result) => {
       // console.log(result.rows[0]);
@@ -281,7 +281,7 @@ const getResource = function (title) {
 
   return db
     .query(`
-    
+
     SELECT content_link_url, title, description, name, date_posted
     FROM posts
     JOIN topics ON topics.id = topic_id

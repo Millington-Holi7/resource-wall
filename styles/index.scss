@@ -1,191 +1,227 @@
-body{
-	margin:0;
-	color:#797f9e;
-	background: #eabc86;
-	background-image: url(https://www.transparenttextures.com/patterns/asfalt-dark.png);
-	font:600 16px/18px 'Open Sans',sans-serif;
+body {
+  margin: 0;
+  color: #797f9e;
+  background: #eabc86;
+  background-image: url(https://www.transparenttextures.com/patterns/asfalt-dark.png);
+  font: 600 16px/18px 'Open Sans', sans-serif;
 }
-*,:after,:before{box-sizing:border-box}
-.clearfix:after,.clearfix:before{content:'';display:table}
-.clearfix:after{clear:both;display:block}
-a{color:inherit;text-decoration:none}
 
-.main-wrap{
-	width:100%;
-	margin:auto;
-	min-height:670px;
-	position:relative;
-  background-color:rgba(59, 88, 161, 0.9);
-	background-image: url(https://www.transparenttextures.com/patterns/asfalt-dark.png);
-	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+*,
+:after,
+:before {
+  box-sizing: border-box
 }
-.save-search{
-	width:100%;
-	height:100%;
-	position:absolute; 
-	padding:90px 70px 50px 70px;
+
+.clearfix:after,
+.clearfix:before {
+  content: '';
+  display: table
+}
+
+.clearfix:after {
+  clear: both;
+  display: block
+}
+
+a {
+  color: inherit;
+  text-decoration: none
+}
+
+.main-wrap {
+  width: 100%;
+  margin: auto;
+  min-height: 670px;
+  position: relative;
+  background-color: rgba(59, 88, 161, 0.9);
+  background-image: url(https://www.transparenttextures.com/patterns/asfalt-dark.png);
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
+}
+
+.save-search {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  padding: 90px 70px 50px 70px;
 }
 
 .save-search .save-post-htm,
-.save-search .search-htm{
-	top:0;
-	left:0;
-	right:0;
-	bottom:0;
-	position:absolute;
-	transform:rotateY(180deg);
-	backface-visibility:hidden;
-	transition:all .4s linear;
+.save-search .search-htm {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  transition: all .4s linear;
 }
 
 
 .save-search .save-post,
-.save-search .search{
-	display:none;
+.save-search .search {
+  display: none;
 }
+
 .save-search .tab,
 .form .group .label,
-.form .group .button{
-	text-transform:uppercase;
+.form .group .button {
+  text-transform: uppercase;
 }
-.save-search .tab{
-	font-size:22px;
-	margin-right:15px;
-	padding-bottom:5px;
-	margin:0 -300px 30px 350px;
-	display:inline-block;
-	border-bottom:2px solid transparent;
+
+.save-search .tab {
+  font-size: 22px;
+  margin-right: 15px;
+  padding-bottom: 5px;
+  margin: 0 -300px 30px 350px;
+  display: inline-block;
+  border-bottom: 2px solid transparent;
 }
-.save-search .save-post:checked + .tab,
-.save-search .search:checked + .tab{
-	color:#fff;
-	border-color:#1161ee;
-	
+
+.save-search .save-post:checked+.tab,
+.save-search .search:checked+.tab {
+  color: #fff;
+  border-color: #1161ee;
+
 }
-.form{
+
+.form {
   margin-left: 20%;
-	min-height:345px;
+  min-height: 345px;
   width: 60%;
-	position:relative;
-	perspective:1000px;
-	transform-style:preserve-3d;
+  position: relative;
+  perspective: 1000px;
+  transform-style: preserve-3d;
 }
-.form .group{
-	margin-bottom:15px;
+
+.form .group {
+  margin-bottom: 15px;
 }
+
 .form .group .label,
 .form .group .input,
-.form .group .button{
-	width:100%;
-	color:#fff;
-	display:block;
+.form .group .button {
+  width: 100%;
+  color: #fff;
+  display: block;
 }
+
 .form .group .input,
-.form .group .button{
-	border:none;
-	padding:15px 20px;
-	border-radius:25px;
-	background:rgba(255,255,255,.1);
+.form .group .button {
+  border: none;
+  padding: 15px 20px;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, .1);
 }
 
-.form .group .label{
-	color:#aaa;
-	font-size:12px;
-}
-.form .group .button{
-  background:#1161ee;
+.form .group .label {
+  color: #aaa;
+  font-size: 12px;
 }
 
-.save-search .save-post:checked + .tab + .search + .tab + .form .save-post-htm{
-	transform:rotate(0);
-}
-.save-search .search:checked + .tab + .form .search-htm{
-	transform:rotate(0);
+.form .group .button {
+  background: #1161ee;
 }
 
-.button{
+.save-search .save-post:checked+.tab+.search+.tab+.form .save-post-htm {
+  transform: rotate(0);
+}
+
+.save-search .search:checked+.tab+.form .search-htm {
+  transform: rotate(0);
+}
+
+.button {
   margin-top: 30px;
 }
 
-.form .group .input{
-	color: #aaa;
+.form .group .input {
+  color: #aaa;
 }
 
 
 
-.container-fluid{
-  background-image:url(https://www.transparenttextures.com/patterns/asfalt-dark.png);
+.container-fluid {
+  background-image: url(https://www.transparenttextures.com/patterns/asfalt-dark.png);
   background-color: #eabc86;
   margin: 20px auto;
   font-family: 'Lato';
 }
-*{
-  margin:0;
-  padding:0;
+
+* {
+  margin: 0;
+  padding: 0;
 }
 
-ul,li{
-  list-style:none;
+ul,
+li {
+  list-style: none;
 }
-ul{
+
+ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-ul li a{
-  text-decoration:none;
-  color:#000;
-  background:#ffc;
-  display:block;
-  height:26em;
-  width:26em;
-  padding:1em;
-  box-shadow: 5px 5px 7px rgba(33,33,33,.7);
-	transform: rotate(-6deg);
-	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
-	padding: 1em;
-	margin-top: 2em;
+
+ul li a {
+  text-decoration: none;
+  color: #000;
+  background: #ffc;
+  display: block;
+  height: 26em;
+  width: 26em;
+  padding: 1em;
+  box-shadow: 5px 5px 7px rgba(33, 33, 33, .7);
+  transform: rotate(-6deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 1em;
+  margin-top: 2em;
 }
-ul li{
-  margin:1em;
+
+ul li {
+  margin: 1em;
 }
 
 p {
   font-family: 'Reenie Beanie';
   font-size: 2rem;
-	font-weight: normal;
-	margin-bottom: 1.2em;
+  font-weight: normal;
+  margin-bottom: 1.2em;
 }
 
-ul li:nth-child(even) a{
-  transform:rotate(4deg);
-  position:relative;
-  top:5px;
-	position:relative;
-  top:5px;
-  background:#cfc;
-}
-ul li:nth-child(3n) a{
-  transform:rotate(-3deg);
-  position:relative;
-  top:-5px;
-	position:relative;
-  top:-5px;
-  background:#ccf;
-}
-ul li:nth-child(5n) a{
-  transform:rotate(5deg);
-  position:relative;
-  top:-10px;
+ul li:nth-child(even) a {
+  transform: rotate(4deg);
+  position: relative;
+  top: 5px;
+  position: relative;
+  top: 5px;
+  background: #cfc;
 }
 
-ul li a:hover,ul li a:focus{
-  box-shadow:10px 10px 7px rgba(0,0,0,.7);
+ul li:nth-child(3n) a {
+  transform: rotate(-3deg);
+  position: relative;
+  top: -5px;
+  position: relative;
+  top: -5px;
+  background: #ccf;
+}
+
+ul li:nth-child(5n) a {
+  transform: rotate(5deg);
+  position: relative;
+  top: -10px;
+}
+
+ul li a:hover,
+ul li a:focus {
+  box-shadow: 10px 10px 7px rgba(0, 0, 0, .7);
   transform: scale(1.15);
-  position:relative;
-  z-index:5;
+  position: relative;
+  z-index: 5;
 }
 
 
@@ -202,9 +238,9 @@ ul li a:hover,ul li a:focus{
 
 .pin:after {
   background-color: #A31;
-  background-image: radial-gradient(25% 25%, circle, hsla(0,0%,100%,.3), hsla(0,0%,0%,.3));
+  background-image: radial-gradient(25% 25%, circle, hsla(0, 0%, 100%, .3), hsla(0, 0%, 0%, .3));
   border-radius: 50%;
-  box-shadow: inset 0 0 0 1px hsla(0,0%,0%,.1), inset 3px 3px 3px hsla(0,0%,100%,.2), inset -3px -3px 3px hsla(0,0%,0%,.2), 23px 20px 3px hsla(0,0%,0%,.15);
+  box-shadow: inset 0 0 0 1px hsla(0, 0%, 0%, .1), inset 3px 3px 3px hsla(0, 0%, 100%, .2), inset -3px -3px 3px hsla(0, 0%, 0%, .2), 23px 20px 3px hsla(0, 0%, 0%, .15);
   content: '';
   height: 12px;
   left: -5px;
@@ -214,22 +250,22 @@ ul li a:hover,ul li a:focus{
 }
 
 .pin:before {
-  background-color: hsla(0,0%,0%,0.1);
-  box-shadow: 0 0 .25em hsla(0,0%,0%,.1);
-  content: ''; 
+  background-color: hsla(0, 0%, 0%, 0.1);
+  box-shadow: 0 0 .25em hsla(0, 0%, 0%, .1);
+  content: '';
 
   height: 24px;
   width: 2px;
   left: 0;
   position: absolute;
   top: 8px;
- 
+
   transform: rotate(57.5deg);
   -moz-transform: rotate(57.5deg);
   -webkit-transform: rotate(57.5deg);
   -o-transform: rotate(57.5deg);
   -ms-transform: rotate(57.5deg);
- 
+
   transform-origin: 50% 100%;
   -moz-transform-origin: 50% 100%;
   -webkit-transform-origin: 50% 100%;
@@ -238,16 +274,16 @@ ul li a:hover,ul li a:focus{
 }
 
 
-.icon{
-	display: flex;
-	justify-content: flex-end;
-	color: rgb(199, 9, 9);
-	
+.icon {
+  display: flex;
+  justify-content: flex-end;
+  color: rgb(199, 9, 9);
+
 }
 
 .fa-solid {
-	margin: 0.2em;
-	font-size: larger;
+  margin: 0.2em;
+  font-size: larger;
   // margin-bottom: 2em;
 }
 

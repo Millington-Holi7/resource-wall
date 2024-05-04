@@ -28,16 +28,16 @@
       <div>
         <h1>Update user profile</h1>
 
-        <img src="<%= profile_pic %>" />
+        <img src="<%= user.profile_pic %>" />
 
         <h3>Change Image</h3>
         <input class="ml-auto" type="url" name="profile_pic" placeholder="upload a url" />
 
         <h3>Username</h3>
-        <input class="ml-auto" type="name" name="username" placeholder="<%= username %>" />
+        <input class="ml-auto" type="name" name="username" placeholder="<%=user.username %>" />
 
         <h3>Email address</h3>
-        <input class="ml-auto" type="email" name="email" placeholder="<%= email %>" />
+        <input class="ml-auto" type="email" name="email" placeholder="<%= user.email %>" />
 
         <h3>Password</h3>
         <input class="ml-auto" type="password" name="password" placeholder="Enter Password" />

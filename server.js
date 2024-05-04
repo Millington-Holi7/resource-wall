@@ -59,11 +59,11 @@ app.use('/api', apiRoutes)
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  console.log('###', req.session)
+
   userQueries.getAllPosts()
     .then(posts => {
 
-      const templateVars = { posts, user: req.session.user_id }
+      const templateVars = { posts, user: req.session}
       res.render('index', templateVars);
     })
     .catch((error) => {

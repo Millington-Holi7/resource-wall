@@ -20,10 +20,6 @@ router.post("/resources/:resourceId/like", (req, res) => {
   }
 });
 
-router.post("/resources/:resourceId/comment", (req, res) => {
-  const { resourceId } = req.params;
-  const { userId } = req.session;
-})
 
 //Search is working
 //comment rate and like,
